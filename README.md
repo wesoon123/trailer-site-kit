@@ -11,7 +11,7 @@ npx github:[OWNER]/trailer-site-kit create temp123-prompt --next
 It asks for the site details (brand, domain, home state, services, keyword split, phone, and so on), then builds the folder. Already have the answers in a file?
 
 ```bash
-npx github:[OWNER]/trailer-site-kit create temp123-prompt --next --inputs temp123-prompt.inputs.json
+npx github:[OWNER]/trailer-site-kit create temp123-prompt --next --inputs examples/temp123-prompt.inputs.json
 ```
 
 Without GitHub, from a local copy of this repo:
@@ -23,7 +23,7 @@ node trailer-site-kit/bin/new-site.mjs create temp123-prompt --next
 | Flag | What it does |
 |---|---|
 | `--next` | Sets up a Next.js App Router + TypeScript project first (needs an empty or new folder) |
-| `--inputs <file.json>` | Reads the site details from a file instead of asking (see `examples/a-linen.inputs.json`) |
+| `--inputs <file.json>` | Reads the site details from a file instead of asking (see `examples/temp123-prompt.inputs.json`) |
 | `--force` | Replaces an existing `site-inputs.md`, `DESIGN.md` and data skeletons |
 
 Leave out `--next` to add the kit to a project that already exists.

@@ -18,7 +18,7 @@ The homepage and Equipment pages are built with `state-trailer-homepage-builder`
 - State build order (national sites): `[STATE_ORDER]` (default: the dispatch state first, then states ranked by demand evidence)
 - Primary rental service: `[PRIMARY_RENTAL_SERVICE]`
 - Secondary rental service: `[SECONDARY_RENTAL_SERVICE]`
-- Keyword split: `[KEYWORD_SPLIT]` as primary / secondary / other Super 9 (default 70 / 15 / 15; for example A Linen uses 60 laundry / 30 dishwashing / 10 other)
+- Keyword split: `[KEYWORD_SPLIT]` as primary / secondary / other Super 9 (default 70 / 15 / 15; for example a laundry-first site might use 60 laundry / 30 dishwashing / 10 other)
 - Pages to build this run: `[SERVICE_AREA_PAGES]` (USA index, a state hub, a hub city with its places, or a named batch)
 - Verified dispatch locations: `[DISPATCH_LOCATIONS]` (if unknown, delivery is "quoted per job")
 - Local asset folder: `[LOCAL_ASSET_FOLDER]`

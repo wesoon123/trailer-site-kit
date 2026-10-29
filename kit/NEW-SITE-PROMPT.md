@@ -35,16 +35,16 @@ Brand colors / logo:         (optional; otherwise Part C defaults)
 Team example pages:
 ```
 
-### Example: A Linen
+### Example: temp123-prompt
 
 ```
-Brand:                       A Linen Rental & Laundry Services USA
-Production domain:           https://aalinenrentalandlaundry.com/
-Preview URL:                 https://aalinenrentalandlaundry.vercel.app/
+Brand:                       [BRAND NAME]
+Production domain:           https://[DOMAIN]/
+Preview URL:                 https://[PREVIEW].vercel.app/
 Site scope:                  national
 Home state / abbreviation:   Florida / FL
-Verified dispatch locations: Miami, FL
-Phone:                       (786) 309-9178
+Verified dispatch locations: [CITY, ST]
+Phone:                       [PHONE]
 Email:                       [EMAIL]
 Primary rental service:      Laundry / Mobile Laundry / Portable Laundry (#7)
 Secondary rental service:    Commercial Dishwashing (#2)

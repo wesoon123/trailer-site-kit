@@ -67,7 +67,7 @@ sync     Update an existing site to the latest kit: skills and NEW-SITE-PROMPT.m
 
 Examples:
   new-trailer-site create temp123-prompt --next
-  new-trailer-site create temp123-prompt --next --inputs examples/a-linen.inputs.json
+  new-trailer-site create temp123-prompt --next --inputs examples/temp123-prompt.inputs.json
   new-trailer-site sync ../temp123-prompt
 `;
 
@@ -132,7 +132,7 @@ const FIELDS = [
     required: true,
     check: (v) => Boolean(findState(v)) || 'Not a U.S. state or DC.',
   },
-  { key: 'dispatch', label: 'Verified dispatch locations (e.g. Miami, FL)' },
+  { key: 'dispatch', label: 'Verified dispatch locations (e.g. City, ST)' },
   { key: 'phone', label: 'Phone' },
   { key: 'email', label: 'Email' },
   {
