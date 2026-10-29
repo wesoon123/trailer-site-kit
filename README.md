@@ -5,19 +5,19 @@ One command to start a new trailer rental website repo with everything the team 
 ## Start a new site
 
 ```bash
-npx github:[OWNER]/trailer-site-kit create aalinen --next
+npx github:[OWNER]/trailer-site-kit create temp123-prompt --next
 ```
 
 It asks for the site details (brand, domain, home state, services, keyword split, phone, and so on), then builds the folder. Already have the answers in a file?
 
 ```bash
-npx github:[OWNER]/trailer-site-kit create aalinen --next --inputs aalinen.inputs.json
+npx github:[OWNER]/trailer-site-kit create temp123-prompt --next --inputs temp123-prompt.inputs.json
 ```
 
 Without GitHub, from a local copy of this repo:
 
 ```bash
-node trailer-site-kit/bin/new-site.mjs create aalinen --next
+node trailer-site-kit/bin/new-site.mjs create temp123-prompt --next
 ```
 
 | Flag | What it does |
@@ -31,7 +31,7 @@ Leave out `--next` to add the kit to a project that already exists.
 ### What lands in the new site
 
 ```
-aalinen/
+temp123-prompt/
 ├── .agents/skills/
 │   ├── state-trailer-homepage-builder/
 │   ├── state-trailer-equipment-pages-builder/
@@ -58,7 +58,7 @@ It also makes the first git commit on `main` (unless the folder is already a git
 ## Update an existing site to the latest kit
 
 ```bash
-npx github:[OWNER]/trailer-site-kit sync ../aalinen
+npx github:[OWNER]/trailer-site-kit sync ../temp123-prompt
 ```
 
 Replaces the skills, `NEW-SITE-PROMPT.md` and the kit block in `AGENTS.md` with the kit's versions. It never touches `site-inputs.md` or `src/data`, and keeps a customized `DESIGN.md` unless you add `--design`.

@@ -66,9 +66,9 @@ sync     Update an existing site to the latest kit: skills and NEW-SITE-PROMPT.m
          --design   also replace DESIGN.md (otherwise a customized DESIGN.md is kept)
 
 Examples:
-  new-trailer-site create aalinen --next
-  new-trailer-site create aalinen --next --inputs examples/a-linen.inputs.json
-  new-trailer-site sync ../aalinen
+  new-trailer-site create temp123-prompt --next
+  new-trailer-site create temp123-prompt --next --inputs examples/a-linen.inputs.json
+  new-trailer-site sync ../temp123-prompt
 `;
 
 // ---------- helpers ----------
@@ -374,7 +374,7 @@ function quiet(cmd, args, cwd) {
 // ---------- commands ----------
 
 async function create(target, flags) {
-  if (!target) fail('Name the folder to create, e.g. new-trailer-site create aalinen');
+  if (!target) fail('Name the folder to create, e.g. new-trailer-site create temp123-prompt');
   const dir = resolve(target);
   const exists = existsSync(dir);
   const nonEmpty = exists && (await readdir(dir)).length > 0;
@@ -473,7 +473,7 @@ Next:
 }
 
 async function sync(target, flags) {
-  if (!target) fail('Name the site folder to update, e.g. new-trailer-site sync ../aalinen');
+  if (!target) fail('Name the site folder to update, e.g. new-trailer-site sync ../temp123-prompt');
   const dir = resolve(target);
   if (!existsSync(dir)) fail(`Folder not found: ${dir}`);
 
