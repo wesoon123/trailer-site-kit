@@ -1,0 +1,23 @@
+{
+  "name": "trailer-site-kit",
+  "version": "1.0.0",
+  "description": "Start trailer rental website repos with the team's skills, master prompt and design in one command.",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "new-trailer-site": "bin/new-site.mjs"
+  },
+  "scripts": {
+    "new-site": "node bin/new-site.mjs"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "files": [
+    "bin",
+    "kit",
+    "examples",
+    "README.md"
+  ],
+  "license": "UNLICENSED"
+}

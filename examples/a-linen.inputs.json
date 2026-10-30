@@ -1,0 +1,21 @@
+{
+  "brand": "A Linen Rental & Laundry Services USA",
+  "domain": "https://aalinenrentalandlaundry.com/",
+  "previewUrl": "https://aalinenrentalandlaundry.vercel.app/",
+  "scope": "national",
+  "homeState": "Florida",
+  "dispatch": "Miami, FL",
+  "phone": "(786) 309-9178",
+  "email": "",
+  "primary": 7,
+  "secondary": 2,
+  "split": "60 / 30 / 10",
+  "units": "",
+  "extraRates": "",
+  "homepageMap": "USA incident map",
+  "stateOrder": "Florida first, then by demand",
+  "repository": "",
+  "photos": "",
+  "brandColors": "Part C defaults",
+  "examplePages": ""
+}
