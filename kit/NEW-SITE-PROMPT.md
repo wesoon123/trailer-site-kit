@@ -28,7 +28,8 @@ Keyword split:               primary / secondary / other   (default 70 / 15 / 15
 Units we rent and where:     (per category: unit names, states where confirmed)
 Extra rates:                 (anything not in the equipment directory)
 Homepage map:                USA incident map | state map
-State build order:           (national sites; default: dispatch state first, then by demand)
+Focus states:                (up to 6 states to highlight on the USA map; the rest stay gray)
+State build order:           (national sites; default: focus states first, then by demand)
 Repository:
 Real photo folder:
 Brand colors / logo:         (optional; otherwise Part C defaults)
@@ -53,6 +54,7 @@ Keyword split:               60 / 30 / 10
 Units we rent and where:     [laundry and dishwashing units confirmed for Florida]
 Extra rates:                 [laundry rates, if any]
 Homepage map:                USA incident map
+Focus states:                Florida, Texas, Utah, Wyoming
 State build order:           Florida first, then [next states]
 Repository:                  [GITHUB REPO URL]
 Real photo folder:           [PATH]
@@ -198,12 +200,23 @@ Mobile < 640px · Tablet 640–1023px · Desktop ≥ 1024px. Design each separat
 ### 6. Service Area pages (approved layouts)
 
 #### USA map page `/service-area/` (national sites)
-1. Shared chrome.
-2. Navy hero: breadcrumb, eyebrow "50 STATES + DC", place-first H1 ("United States [Service] Service Areas", "United States" in aqua), short intro, wave.
-3. Map section (white): eyebrow "PICK A STATE", H2 "Real Incidents, State by State". Left: a "Choose a state" select (44px) above the USA map. Right: a white panel (bottom sheet on mobile) with "SELECTED STATE", the state name, a status pill (lime "Confirmed dispatch · [city]" or gray "Inquiry only"), 1–3 incident cards (navy date chip with aqua text, bold title, one-line summary, "Equipment need:" line), a lime CTA, and the small line "Incidents are local context, not a record of our work."
-4. Map styling: states with researched incidents in navy, research-slot states in `--color-surface-2`, selected state aqua with navy label, dispatch state with a lime inner ring; legend below. The live site uses the real Census outline (Albers USA with Alaska and Hawaii insets); a tile grid is acceptable only as a mockup.
-5. Crawlable list (light gray): every state's incidents in plain text, 3-column cards, each state name linking to its page once live.
-6. Footer.
+1. Shared chrome: header with nav (**Home | Equipment | Service Area | Use cases | About Us | Contact Us**, current page underlined) and the dark Request Quote button.
+2. Hero (light `--color-surface` background, two columns): breadcrumb "Home › Service Area"; place-first H1 "United States [Primary Service] Service Areas"; a "DESCRIPTION · 2–3 SENTENCES" intro; dark "Get a Quote" and outlined "Call [Phone]" buttons. Right column: feature image, a real trailer photo (dashed placeholder until supplied).
+3. **By Region and Featured State** (white): H2, short intro, then two pill rows. **Region:** All, West, Midwest, South, Northeast. **Featured:** the site's focus states (Part A "Focus states"), for example Florida, Texas, Utah, Wyoming.
+   - **Left, map card:** eyebrow "STATE / REGION MAP · CLICKABLE", a "State" select at top right (also the mobile and keyboard path), the map, and a legend (In selected region, Other regions, Featured state, Selected).
+   - **Right, details card** (outlined; bottom sheet on mobile): eyebrow "DETAILS · [REGION]", the state name, a short description, then four facts in a 2 × 2 grid: **Incorporated places** (Census data), **Hub cities** (places data), **Status** (Confirmed dispatch · [city] / Inquiry only), **Rates** (from the equipment directory, or "Request a quote"). Under them a dashed box with 1–2 researched incidents ("[Researched incident · date · source]"). Then **PAGES**: "[State] service area page →", up to four hub cities, "All [State] places, A–Z →" (link only pages that exist). Last, a dark "Get a quote for [State]" button.
+4. **Incidents by State:** 3-column cards, each with the state name and 2 dated incidents. Crawlable plain-text list of every state's incidents, each state name linking to its page once live.
+5. **How Delivery Works:** four step cards: 1 Tell us the site, 2 Pick the unit, 3 Site review, 4 Quote and delivery.
+6. **Equipment We Rent:** the primary service as the largest card (photo, sizes, link), the secondary service as a card, and a dashed card of "Other Super 9" linked chips, following the keyword split.
+7. **FAQs** (accordion, first open): Do you deliver to my state? How is delivery priced? How fast can you deliver? What does the site need?
+8. Final CTA band: "Get a quote for your location", Get a Quote and Call [Phone]. Footer: brand, city, state, phone, and the nav links.
+
+**Map behavior and styling (focus states):**
+- **Every state starts gray** (`--color-surface-2`). Only the **focus states** are colored, each in the color of its Census division (palette below). Non-focus states stay gray, outlined, and still clickable (they show "Inquiry only" and a quote link).
+- **Region pills** filter the map: states in the picked region get a slightly darker gray, other regions stay light, and focus states stay colored. **Featured pills** select a focus state directly. The selected state gets a dark navy fill with a white label; a dispatch state keeps a lime inner ring.
+- **Census division colors** (from the approved reference map; use only for focus states): Pacific #FFB800, Mountain #FFA000, West North Central #3F7D3A, East North Central #1E5128, West South Central #4AAFF8, East South Central #0093F0, South Atlantic #1B3A6F, Mid-Atlantic #F26A0F, New England #F52027. Pills map to divisions: West = Pacific + Mountain, Midwest = East + West North Central, South = South Atlantic + East + West South Central, Northeast = New England + Mid-Atlantic.
+- Never rely on color alone: every state has a text label or tooltip and a keyboard-focus ring. The live site uses the real Census outline (Albers USA with Alaska and Hawaii insets); a tile grid is acceptable only as a mockup.
+- The data comes from `src/data/us-states.json`: each state has `region`, `division`, `focus` (true or false), `status`, and `incidents`.
 
 #### State page `/service-area/[state]/`
 Navy hero with place-first H1 → state map of every municipality (search, legend: hub / live page / planned; marker popup with name, legal type, county, one sourced fact, link) → regions and hub cities → the 5 data points, statewide (timeline) → statewide local knowledge → FAQs → trailer specifications → CTA band → crawlable municipality list → footer.
@@ -315,7 +328,7 @@ Read NEW-SITE-PROMPT.md.
 ```
 $state-trailer-homepage-builder
 Use site-inputs.md and NEW-SITE-PROMPT.md (Parts B–E). Design: DESIGN.md.
-If "Homepage map" in site-inputs.md is "USA incident map", build section 08 as the USA incident map from DESIGN.md section 6 instead of a state map.
+If "Homepage map" in site-inputs.md is "USA incident map", build section 08 as the USA map from DESIGN.md section 6 (focus states colored by region, all other states gray) instead of a state map.
 Build the homepage only.
 ```
 
@@ -331,7 +344,7 @@ Repeat with `Pages to build: [category] category page` for each other category t
 ```
 $state-trailer-service-area-builder
 Use site-inputs.md and NEW-SITE-PROMPT.md (Parts B–E). Design: DESIGN.md.
-National sites: build /service-area/ with the USA incident map, researching 1–3 real, dated incidents for every state into src/data/us-states.json. Then build the state pages in batches of [10] states, registering every incorporated municipality for each state in src/data/service-areas/[state].json.
+National sites: build /service-area/ exactly as the USA map page layout in DESIGN.md section 6 (hero, By Region and Featured State, Incidents by State, How Delivery Works, Equipment We Rent, FAQs, CTA). Highlight only the focus states from site-inputs.md; every other state stays gray. Research 1–3 real, dated incidents for every state into src/data/us-states.json, focus states first. Then build the state pages in batches of [10] states, registering every incorporated municipality for each state in src/data/service-areas/[state].json.
 State sites: build the one state page and register every municipality in that state.
 List the states still to do at the end.
 ```

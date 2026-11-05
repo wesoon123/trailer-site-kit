@@ -40,6 +40,33 @@ const STATES = [
   ['WY', 'Wyoming'],
 ];
 
+// The 9 U.S. Census divisions (colors sampled from the approved reference map) and the 4 regions the USA map pills use.
+const DIVISIONS = {
+  'Pacific': { region: 'West', color: '#FFB800', states: ['AK', 'CA', 'HI', 'OR', 'WA'] },
+  'Mountain': { region: 'West', color: '#FFA000', states: ['AZ', 'CO', 'ID', 'MT', 'NM', 'NV', 'UT', 'WY'] },
+  'West North Central': { region: 'Midwest', color: '#3F7D3A', states: ['IA', 'KS', 'MN', 'MO', 'ND', 'NE', 'SD'] },
+  'East North Central': { region: 'Midwest', color: '#1E5128', states: ['IL', 'IN', 'MI', 'OH', 'WI'] },
+  'West South Central': { region: 'South', color: '#4AAFF8', states: ['AR', 'LA', 'OK', 'TX'] },
+  'East South Central': { region: 'South', color: '#0093F0', states: ['AL', 'KY', 'MS', 'TN'] },
+  'South Atlantic': { region: 'South', color: '#1B3A6F', states: ['DC', 'DE', 'FL', 'GA', 'MD', 'NC', 'SC', 'VA', 'WV'] },
+  'Mid-Atlantic': { region: 'Northeast', color: '#F26A0F', states: ['NJ', 'NY', 'PA'] },
+  'New England': { region: 'Northeast', color: '#F52027', states: ['CT', 'MA', 'ME', 'NH', 'RI', 'VT'] },
+};
+const MAX_FOCUS = 6;
+
+function divisionOf(abbr) {
+  const name = Object.keys(DIVISIONS).find((d) => DIVISIONS[d].states.includes(abbr));
+  return { division: name, region: DIVISIONS[name].region };
+}
+
+// "Florida, tx, UT" -> [['FL','Florida'], ['TX','Texas'], ['UT','Utah']]; null if any item is not a state
+function parseFocus(value) {
+  const items = String(value || '').split(/[,;]+/).map((x) => x.trim()).filter(Boolean);
+  const found = items.map(findState);
+  if (!items.length || found.some((s) => !s)) return null;
+  return [...new Map(found.map((s) => [s[0], s])).values()];
+}
+
 const FILL = '[FILL IN]';
 
 const USAGE = `new-trailer-site ${PKG.version}
@@ -155,9 +182,20 @@ const FIELDS = [
     def: (a) => (a.scope === 'state' ? 'state map' : 'USA incident map'),
   },
   {
+    key: 'focusStates',
+    label: `Focus states to highlight on the USA map, up to ${MAX_FOCUS}, comma separated (the rest stay gray)`,
+    def: (a) => (findState(a.homeState) ? findState(a.homeState)[1] : ''),
+    check: (v) => {
+      const list = parseFocus(v);
+      if (!list) return 'Use state names or 2-letter codes, separated by commas.';
+      return list.length <= MAX_FOCUS || `Pick ${MAX_FOCUS} states or fewer.`;
+    },
+    skip: (a) => a.scope === 'state',
+  },
+  {
     key: 'stateOrder',
     label: 'State build order',
-    def: (a) => `${findState(a.homeState)[1]} first, then by demand`,
+    def: (a) => `${a.focusStates || findState(a.homeState)[1]} first, then by demand`,
     skip: (a) => a.scope === 'state',
   },
   { key: 'repository', label: 'Repository URL' },
@@ -174,6 +212,8 @@ function normalize(raw) {
     a[f.key] = v === undefined || v === null ? '' : String(v).trim();
   }
   a.scope = (a.scope || 'national').toLowerCase();
+  const focus = parseFocus(a.focusStates);
+  if (focus) a.focusStates = focus.map((s) => s[1]).join(', ');
   for (const f of FIELDS) {
     if (f.skip && f.skip(a)) continue;
     if (a[f.key] !== '' || !f.def) continue;
@@ -265,6 +305,7 @@ function siteInputsMarkdown(a) {
     ['Units we rent and where:', or(a.units, `${FILL}: units confirmed per category, and the states they serve`)],
     ['Extra rates:', or(a.extraRates, 'none')],
     ['Homepage map:', a.homepageMap],
+    ['Focus states:', a.scope === 'state' ? 'n/a (state site)' : a.focusStates],
     ['State build order:', a.scope === 'state' ? 'n/a (state site)' : a.stateOrder],
     ['Repository:', or(a.repository)],
     ['Real photo folder:', or(a.photos)],
@@ -287,12 +328,17 @@ ${body}
 
 function usStatesSkeleton(a) {
   const home = findState(a.homeState)[0];
+  const focus = new Set((parseFocus(a.focusStates) || [findState(a.homeState)]).map((s) => s[0]));
   return {
-    about: 'USA incident map data. Each state needs 1-3 real, dated, sourced incidents before launch. Incident shape: { "title", "date", "summary", "equipmentNeed", "sourceUrl" }.',
+    about: 'USA map data. Only states with focus: true are colored on the map (in their division color); all others stay gray. Each state needs 1-3 real, dated, sourced incidents before launch, focus states first. Incident shape: { "title", "date", "summary", "equipmentNeed", "sourceUrl" }.',
+    regions: ['West', 'Midwest', 'South', 'Northeast'],
+    divisions: Object.fromEntries(Object.entries(DIVISIONS).map(([name, d]) => [name, { region: d.region, color: d.color }])),
     states: STATES.map(([abbr, name]) => ({
       abbr,
       name,
       slug: slugify(name),
+      ...divisionOf(abbr),
+      focus: focus.has(abbr),
       status: abbr === home && a.dispatch ? 'confirmed-dispatch' : 'inquiry',
       statePage: 'planned',
       incidents: [],

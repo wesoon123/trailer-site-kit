@@ -1,6 +1,6 @@
 ---
 name: state-trailer-service-area-builder
-description: Build the Service Area section of a trailer rental site. For national sites this starts with a USA map where each state shows its own local incidents, and every state gets its own landing pages. Each state has a state hub with an all-municipalities map, hub city pages, and a landing page for every incorporated municipality, county or countryside area (/service-area/state/city/place/). Pages follow Kermit's place-first H1, 5 sequential local data points, local-knowledge checklist, keyword split and 18-point audit, with trailer specifications at the bottom. Use for Service Area pages only.
+description: Build the Service Area section of a trailer rental site. For national sites this starts with a USA map (only the focus states highlighted, by Census region color) where each state shows its own local incidents, and every state gets its own landing pages. Each state has a state hub with an all-municipalities map, hub city pages, and a landing page for every incorporated municipality, county or countryside area (/service-area/state/city/place/). Pages follow Kermit's place-first H1, 5 sequential local data points, local-knowledge checklist, keyword split and 18-point audit, with trailer specifications at the bottom. Use for Service Area pages only.
 ---
 
 # Trailer Rental Service Area Builder
@@ -13,6 +13,7 @@ The homepage and Equipment pages are built with `state-trailer-homepage-builder`
 ## Project inputs
 - Brand: `[BRAND_NAME]`
 - Production domain: `[DOMAIN]`
+- Focus states: `[FOCUS_STATES]` (up to 6; the only states highlighted on the USA map, each in its Census division color; every other state stays gray)
 - Site scope: `[SITE_SCOPE]`: `national` (USA map index plus state pages) or `state` (one target state, no USA map)
 - State being built this run and abbreviation: `[STATE_NAME]` / `[ST]`
 - State build order (national sites): `[STATE_ORDER]` (default: the dispatch state first, then states ranked by demand evidence)
@@ -64,14 +65,16 @@ Create or update one data file **for every state** in the repo, following repo c
 
 Fields per place: name, slug, legal type (city / town / village / county / CDP / unincorporated / region), incorporated (yes/no), county, region, latitude, longitude, population and source year, level (hub / place / map-only), parent hub slug, map fact (one short sourced local fact), page status (planned / draft / live), research log path, worker, last updated.
 
-Fields per state (USA map): name, abbreviation, incidents (1–3, each with title, date, one-to-two-sentence summary, equipment need, source URL), status (confirmed dispatch / live state page / inquiry only), state hub slug.
+Fields per state (USA map): name, abbreviation, region (West / Midwest / South / Northeast), division (one of the 9 Census divisions), focus (true or false), incidents (1–3, each with title, date, one-to-two-sentence summary, equipment need, source URL), status (confirmed dispatch / live state page / inquiry only), state hub slug.
 
 - **Register every incorporated municipality** in each state from that state's official municipal list (for example the state league of cities directory), with coordinates from the U.S. Census Bureau Gazetteer place files. Record both sources and the totals by type. Add all counties. Never hand-place coordinates.
 
-## USA incident map (Level 0, national sites only)
-Kermit's requirement: a USA map where **every state shows its own, different local incidents and local knowledge**, not the same generic message for every state.
+## USA map (Level 0, national sites only)
+Kermit's requirement: a USA map where **every state shows its own, different local incidents and local knowledge**, not the same generic message for every state. The layout is the approved one in `DESIGN.md` section 6 ("USA map page").
 - **Map:** all 50 states plus DC, outline from Census cartographic boundary files, Albers USA projection with Alaska and Hawaii insets, generated at build time.
-- **Interaction:** hovering, focusing, or clicking a state opens a panel. Keyboard accessible with visible focus; a state dropdown for mobile.
+- **Focus states only are highlighted.** Every state starts gray. Each state in `[FOCUS_STATES]` is filled with its Census division color (Pacific, Mountain, West North Central, East North Central, West South Central, East South Central, South Atlantic, Mid-Atlantic, New England; hex values in `DESIGN.md`). Non-focus states stay gray and clickable ("Inquiry only"). Never color a state that is not a focus state.
+- **Controls:** Region pills (All, West, Midwest, South, Northeast) filter the map; Featured pills select a focus state; a State dropdown is the keyboard and mobile path. Region groupings come from the `region` and `division` fields in `src/data/us-states.json`.
+- **Details card:** shows the selected state's name and region, incorporated places (Census data), hub cities (places data), status, rates, and 1–2 researched incidents, then page links and a quote CTA for that state.
 - **Panel contents:**
   - The state's name.
   - 1–3 dated, sourced incidents or local-knowledge facts from that state, such as hurricanes, floods, wildfires, freezes, a hospital or school system outage, or a major construction or renovation program.
@@ -80,7 +83,7 @@ Kermit's requirement: a USA map where **every state shows its own, different loc
   - A link to the state hub if it is live; otherwise "Request a quote for [State]". Never link to a page that doesn't exist.
 - **Every state is different:** no template sentence with only the state name swapped. Prefer the last 10 years: FEMA major disaster declarations, NOAA billion-dollar disaster reports, National Weather Service event summaries, state emergency management, and major news.
 - **Integrity:** incidents are local context, not claims that the brand responded. Mark only verified dispatch locations as dispatch. Never imply delivery commitments to inquiry-only states.
-- **Crawlable:** render every state's panel text on the server in an HTML list or accordion below the map, so search engines can read it.
+- **Crawlable:** render every state's panel text on the server in an HTML list or accordion ("Incidents by State") below the map, so search engines can read it.
 
 ## State map (Level 1; mini-map on hub cities)
 - Accurate SVG outline of `[STATE_NAME]` only, generated at build time from the manifest with one shared projection (for example d3-geo fitted to a Census cartographic boundary outline).
@@ -149,12 +152,12 @@ Date every event; prefer the last 10 years plus landmark historic events. Every 
 
 ### Level 0: USA index (national sites)
 1. Header (exact nav: **Home | Equipment | Service Area | Use cases | About Us | Contact Us**, plus Request Quote) and breadcrumb.
-2. Hero: place-first H1, 80–120-word intro, quote CTA, phone.
-3. USA incident map with state panels and legend.
-4. Crawlable state-by-state list with each state's incidents and status.
-5. Verified dispatch locations and how out-of-area quotes work.
-6. Equipment overview following the keyword split, linking to Equipment pages.
-7. FAQs (5–6), final CTA, footer.
+2. Hero: place-first H1 ("United States [Primary Service] Service Areas"), short intro, Get a Quote and Call buttons, feature image (real trailer photo).
+3. By Region and Featured State: Region pills, Featured (focus state) pills, USA map card with State select and legend, and the details card for the selected state.
+4. Incidents by State: cards plus a crawlable state-by-state list with each state's incidents and status.
+5. How Delivery Works: four steps, with verified dispatch locations and how out-of-area quotes work.
+6. Equipment We Rent: primary, secondary, and other Super 9, following the keyword split, linking to Equipment pages.
+7. FAQs (accordion: deliver to my state, pricing, speed, site needs), final CTA, footer.
 
 ### Level 1: State hub
 1. Header and breadcrumb.
