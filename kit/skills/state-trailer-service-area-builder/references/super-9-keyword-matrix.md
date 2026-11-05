@@ -92,7 +92,14 @@ When a site's primary service belongs to one family, the 15% balance leans on th
 - **Core target terms:** remote man camp, workforce housing, basecamp life support services, multi-unit life support deployment
 - **Primary intent:** turnkey remote site infrastructure integrating kitchens, dining, sleeping, laundry, shower, and power support
 - **Note:** mention all sub-categories (sleeper/bunkhouse, shower, shower combination bathroom, restroom, laundry) as sub-keywords in basecamp paragraphs.
-- **Added use: emergency data center facility construction.** Kermit's notes add emergency data center facility construction as a basecamp use (services, rentals, temporary facilities). The notes point to a Google Doc for details that was not available when this matrix was updated; use the use case only with sourced local facts, and add the doc's findings here when someone supplies them.
+- **Added use: emergency temporary remote workforce housing for data centers, mining, and solar farms** (from the team's "data center addition to man camp" notes). Keywords to add: emergency workforce housing, data center construction workforce housing, remote solar farm camps, mining camp housing, turnkey workforce housing, temporary camp delivery setup and removal, CAD and site planning services.
+- **Three separate service tabs** (never merge them; each has its own H1, copy, and Request a Quote button):
+  1. **Turnkey Workforce Housing** for emergency response crews and data center construction workers.
+  2. **Emergency CAD & Site Planning Services** for workforce housing, data center camps, and solar farm camps.
+  3. **Emergency Temporary Remote Solar Farm Camps and Workforce Housing.** The solar farm H1 belongs to this tab only.
+- **Reference pages from the notes** (structure ideas only, never copy wording, layout, or photos): https://www.cottonlogistics.com/industries-and-applications/data-centers/ and https://www.datacentersitefacilities.com/restroom-trailer-rentals/ .
+- **Truthful use:** "emergency" only with verified emergency service. The $200–$350 per person price is not publishable until the billing period is confirmed (directory conflict C6).
+- **Location pages:** price changes alone do not make pages unique. Each location page needs meaningful local detail about delivery, site conditions, workforce needs, and available services.
 
 ---
 

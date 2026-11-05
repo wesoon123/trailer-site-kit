@@ -29,6 +29,7 @@ Follow `NEW-SITE-PROMPT.md` Part C (section 7b) and `DESIGN.md` section 7b for t
 7. **Confirmed units only.** A category offered in the equipment list must be rented per "Units we rent and where". If the chosen state is not confirmed for that category, show "Inquiry only: request a quote" instead of a price.
 8. **Disclaimer on every result:** starting prices exclude final rental length, taxes, permits, utilities, site preparation, setup, servicing, mileage, and other project charges unless confirmed in writing.
 9. **Show "Prices updated [date]"** from `pricing.json`.
+10. **Unconfirmed prices never publish.** Any price flagged in the directory's "Data conflicts to confirm" list (for example the man camp package, conflict C6) or marked unconfirmed in `site-inputs.md` shows "Request a quote", with no number and no total.
 
 ## Variants (ADA, luxury, VIP)
 Where the directory lists ADA, luxury, or VIP units with their own rates (for example the ADA combination trailers, the luxury combination trailers, the VIP sleeper), offer each as its own equipment option, grouped under its category, with its own starting price. Do not fold them into a category average. If two variants share one range, say so; if the directory flags a conflict for them, show "Request a quote" until it is resolved.

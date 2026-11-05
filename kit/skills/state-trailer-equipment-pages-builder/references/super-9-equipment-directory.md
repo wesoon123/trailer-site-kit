@@ -12,7 +12,7 @@ Company baseline for equipment categories, unit lineup, utility specs, scope key
 | 6 | Restroom Bathroom / Portable Restroom Bathroom | `restroom-trailers` | No: Request a quote |
 | 7 | Laundry / Mobile Laundry / Portable Laundry | `laundry-trailers` | No: Request a quote |
 | 8 | Sleeper / Bunkbed / Portable Sleeper | `sleeper-trailers` | No: Request a quote |
-| 9 | Remote Man Camp Basecamp / Remote Workforce Housing | `remote-man-camps` | No: Request a quote |
+| 9 | Remote Man Camp Basecamp / Remote Workforce Housing | `remote-man-camps` | Pending: turnkey package $200–$350 per person, billing period unconfirmed (see C6). Request a quote until confirmed |
 
 ---
 
@@ -206,9 +206,15 @@ Company baseline for equipment categories, unit lineup, utility specs, scope key
 
 ## 9. Remote Man Camp Basecamp / Remote Workforce Housing
 
-**Scope Keywords:** Remote man camp, remote workforce housing, basecamp life support services, temporary facilities, industrial cleanup housing.
+**Scope Keywords:** Remote man camp, remote workforce housing, basecamp life support services, temporary facilities, industrial cleanup housing, emergency temporary remote workforce housing for data centers, mining and solar farms, data center construction workforce housing, remote solar farm camps.
 
-**Rates:** none listed. Use **Request a quote**.
+**Rates:** turnkey package **$200–$350 per person**, from the team's data center addition notes. The billing period (per person, per day, per week, per month) is **not confirmed**, so do not publish this figure yet (see C6). Use **Request a quote**.
+
+**Turnkey package inclusions (confirm before publishing):** shower facilities, restroom facilities, sleeping accommodations, laundry facilities, kitchen and dining facilities with three meals per person per day, recreation area, and camp delivery, setup, and removal coordination.
+
+**Emergency CAD and site planning services (separate service, own quote):** site plans, plot plans, kitchen permit plans, plumbing plans, electrical plans, site grading plans, fencing and security plans. These are drafting, planning, and permit-coordination services. Engineering, licensed professional review, or agency approval may be required; never imply drafting guarantees permit approval.
+
+**Camp arrangements depend on:** workforce size, project duration, site access, water supply, power, and wastewater service.
 
 **Turnkey Facility Integration:** Complete life-support infrastructure bundling Mobile Kitchens, Dishwashing, Refrigeration, Restroom/Shower Trailers, Laundry, and Sleeper Trailers with 100 kW Generators, Spider Boxes, Potable Water Bladders, Waste Pumping, and Grease Trap Management.
 
@@ -222,4 +228,5 @@ These are reviewer notes, not source data. Until confirmed, do not publish the a
 - **C2 (30ft Luxury Combination, 8 stalls):** 1–14 Days $3,995 is lower than the smaller 22ft 6-stall unit ($4,995), and its Monthly range ($3,995–$5,995) starts at the same figure as its 1–14 Days rate. Likely a typo.
 - **C3 (ADA combination units):** 3 Stall + 1 ADA and 8 Stall + 1 ADA have identical rates ($5,995–$6,995 / $7,995). Confirm this is intended.
 - **C4 (Combination rate period):** confirm "1–14 Days" is a flat price for any rental of 1 to 14 days, not a per-day rate, before wording it on a page.
+- **C6 (Man camp package price):** the data center addition notes give $200–$350 per person, with the billing period unconfirmed (per person, per day, or other). Publish no man camp price, including in the calculator, until the billing period and package inclusions are confirmed. Location-based adjustments of 1%–5% are allowed only where supported by actual service costs and approved pricing.
 - **C5 (40ft Bulk Combination Kitchen):** specs list only the included prep trailer's equipment (no cooking line). Confirm the cooking equipment before describing it as a production kitchen beyond what is listed.

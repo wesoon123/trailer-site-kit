@@ -182,6 +182,7 @@ const FIELDS = [
   { key: 'split', label: 'Keyword split primary / secondary / other', def: () => '70 / 15 / 15' },
   { key: 'units', label: 'Units you rent and where (blank to fill in later)' },
   { key: 'extraRates', label: 'Rates not in the equipment directory (blank for none)' },
+  { key: 'manCampPrice', label: 'Man camp package price with billing period, or unconfirmed (blank = unconfirmed)' },
   { key: 'deliveryRates', label: 'Starting delivery price by trailer length, e.g. 20 ft $995, 40 ft $2,995 (blank for none)' },
   {
     key: 'homepageMap',
@@ -313,6 +314,7 @@ function siteInputsMarkdown(a) {
     ['Keyword split:', a.split],
     ['Units we rent and where:', or(a.units, `${FILL}: units confirmed per category, and the states they serve`)],
     ['Extra rates:', or(a.extraRates, 'none')],
+    ['Man camp package price:', or(a.manCampPrice, 'unconfirmed (do not publish)')],
     ['Delivery rates:', or(a.deliveryRates, 'none (delivery quoted per job)')],
     ['Homepage map:', a.homepageMap],
     ['Focus states:', a.scope === 'state' ? 'n/a (state site)' : a.focusStates],

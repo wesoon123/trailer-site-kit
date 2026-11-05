@@ -29,6 +29,7 @@ Keyword split:               primary / secondary / other   (default 70 / 15 / 15
 Units we rent and where:     (per category: unit names, states where confirmed)
 Extra rates:                 (anything not in the equipment directory)
 Delivery rates:              (starting delivery price by trailer length, or none; feeds the calculator)
+Man camp package price:      (e.g. $200–$350 per person; state the billing period, or write "unconfirmed"; unconfirmed prices are never published)
 Homepage map:                USA incident map | state map
 Focus states:                (up to 6 states to highlight on the USA map; the rest stay gray)
 State build order:           (national sites; default: focus states first, then by demand)
@@ -57,6 +58,7 @@ Keyword split:               60 / 30 / 10
 Units we rent and where:     [laundry and dishwashing units confirmed for Florida]
 Extra rates:                 [laundry rates, if any]
 Delivery rates:              [by trailer length, or none]
+Man camp package price:      [price and billing period, or unconfirmed]
 Homepage map:                USA incident map
 Focus states:                Florida, Texas, Utah, Wyoming
 State build order:           Florida first, then [next states]
@@ -310,6 +312,7 @@ Only the menu, maps, forms, sticky contact, and carousel are client components. 
 | State pages | `/service-area/[state]/` | 51 on national sites (50 states + DC); 1 on state sites | `state-trailer-service-area-builder` |
 | Hub cities | `/service-area/[state]/[city]/` | about 10–40 per state, each holding 10–20 places | `state-trailer-service-area-builder` |
 | Place pages | `/service-area/[state]/[city]/[place]/` | every incorporated municipality, plus counties, countryside, and unincorporated areas with real demand | `state-trailer-service-area-builder` |
+| Man camp service tabs (when the brand rents Super 9 #9) | `/equipment/remote-man-camps/` plus 3 separate pages | 1 hub + 3 | `state-trailer-equipment-pages-builder` |
 | Rental calculator | `/rental-calculator/` | 1, plus the floating estimate modal on every page | `state-trailer-calculator-builder` |
 | Use cases, About Us, Contact Us | existing routes | 1 each | Not covered by the skills yet; link only if they exist |
 
@@ -351,6 +354,7 @@ The skills hold the full detail; these are the rules that never change.
 13. **Truthful modifiers:** "emergency", "24/7", "leasing", "ADA", "luxury", "VIP", and "deluxe" only when verified for the unit (see the keyword matrix, Tier modifiers).
 14. **Kermit's 18-point audit** on every batch, as each skill describes.
 15. **Estimates:** the calculator and modal show only published starting prices from the price list (directory, Extra rates, Delivery rates), in the trailer-focus order. A category with no listed rate shows "Request a quote". Never convert Daily, Weekly, and Monthly rates into each other, and never estimate a missing rate from another category. Every result says it is a planning estimate and sends nothing until a quote is requested.
+16. **Man camp pages:** three separate service tabs (turnkey workforce housing, emergency CAD and site planning, solar farm camps), each with its own H1 and Request a Quote button. Publish no man camp price until the billing period is confirmed. CAD and planning copy never implies permit approval and says what may need engineering or agency review. Location pages need real local detail; a price change alone does not make a page unique. Builder notes marked private never appear on the site.
 
 ---
 
@@ -380,7 +384,7 @@ Build the homepage only.
 ```
 $state-trailer-equipment-pages-builder
 Use site-inputs.md and NEW-SITE-PROMPT.md (Parts B–E). Design: DESIGN.md.
-Pages to build: Equipment hub + the primary and secondary category pages.
+Pages to build: Equipment hub + the primary and secondary category pages. If the brand rents Remote Man Camp, also build its three separate service tab pages (see the Man camp category section of the Equipment skill).
 ```
 Repeat with `Pages to build: [category] category page` for each other category the brand rents.
 

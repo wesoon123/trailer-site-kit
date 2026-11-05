@@ -14,6 +14,7 @@
   "units": "",
   "extraRates": "",
   "deliveryRates": "",
+  "manCampPrice": "",
   "homepageMap": "USA incident map",
   "focusStates": "Florida, Texas, Utah, Wyoming",
   "stateOrder": "Florida first, then by demand",
