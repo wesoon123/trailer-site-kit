@@ -33,6 +33,7 @@ Repository:
 Real photo folder:
 Brand colors / logo:         (optional; otherwise Part C defaults)
 Team example pages:
+Second brain vault:          (folder path or repo URL of the knowledge vault, or none)
 ```
 
 ### Example: temp123-prompt
@@ -57,6 +58,7 @@ Repository:                  [GITHUB REPO URL]
 Real photo folder:           [PATH]
 Brand colors / logo:         Part C defaults
 Team example pages:          [LOUISVILLE PAGE URL]
+Second brain vault:          [PATH OR REPO URL, or none]
 ```
 
 ---
@@ -271,7 +273,7 @@ Only the menu, maps, form, and carousel are client components. Everything else r
 - **Every place gets its own page,** nested under its nearest hub city. Hub cities are chosen by size and demand, not by the words city, town, or village.
 - **Routes:** lowercase and hyphenated; add the county only when two places in a state share a name. Breadcrumbs mirror the route.
 - **Navigation, every page:** **Home | Equipment | Service Area | Use cases | About Us | Contact Us**, plus a Request Quote button.
-- **Data files:** the Super 9 equipment directory and keyword matrix (inside the skills), `src/data/us-states.json` (USA map incidents), `src/data/service-areas/[state].json` (every place in the state), and a research log per location page.
+- **Data files:** the Super 9 equipment directory and keyword matrix (inside the skills), `src/data/us-states.json` (USA map incidents), `src/data/service-areas/[state].json` (every place in the state), and a research log per location page. If Part A names a second brain vault, local facts come from it first and new research is written back to it.
 
 ---
 

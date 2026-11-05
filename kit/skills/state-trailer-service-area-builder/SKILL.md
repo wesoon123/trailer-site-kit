@@ -25,6 +25,7 @@ The homepage and Equipment pages are built with `state-trailer-homepage-builder`
 - Repository: `[PROJECT_REPOSITORY]`
 - Verified phone/email: `[PHONE]` / `[EMAIL]`
 - Team example page to match: `[EXAMPLE_PAGE_URL]`
+- Second brain vault: `[SECOND_BRAIN_VAULT]` (folder path or repo URL of the team's knowledge vault; `none` if the site has no vault)
 - Outside reference: https://charlestonrestroomtrailerssc.com/south-carolina/abbeville/ (good structure for the 5 data points; do not copy its prices or wording)
 - Keyword data: `references/super-9-keyword-matrix.md`
 - Equipment, specs and rates: `references/super-9-equipment-directory.md` (copy of the Equipment skill's directory; update both together)
@@ -105,6 +106,13 @@ Kermit's requirement: a USA map where **every state shows its own, different loc
 
 ## Local knowledge and real rental situations
 For every landing page, research accurate, useful examples in each category below. Use what genuinely exists; write "none found" in the research log instead of inventing anything.
+
+**Second brain first.** When `[SECOND_BRAIN_VAULT]` is not `none`:
+1. Before researching a place, read `places/<state>/<place>.md` in the vault (and `places/<state>/_state.md` for state pages). Reuse its sourced facts and its `None found (searched <date>)` entries; research only what is missing, empty, or older than 12 months.
+2. Match the place's industries, risks, and geography to the vault's `use-cases/` notes for rental situations.
+3. After researching, write every new sourced fact back to the vault note (source URL, publication date, access date) and set `last_checked`, so the next site starts from it.
+4. Facts taken from the vault still go into this page's research log with their original source, not "from the vault".
+If the vault is not reachable, say so and research normally; never invent vault content.
 
 | Category | What to find | Where to look |
 |---|---|---|

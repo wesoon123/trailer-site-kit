@@ -5,13 +5,13 @@ One command to start a new trailer rental website repo with everything the team 
 ## Start a new site
 
 ```bash
-npx github:[OWNER]/trailer-site-kit create temp123-prompt --next
+npx github:wesoon123/trailer-site-kit create temp123-prompt --next
 ```
 
 It asks for the site details (brand, domain, home state, services, keyword split, phone, and so on), then builds the folder. Already have the answers in a file?
 
 ```bash
-npx github:[OWNER]/trailer-site-kit create temp123-prompt --next --inputs examples/temp123-prompt.inputs.json
+npx github:wesoon123/trailer-site-kit create temp123-prompt --next --inputs examples/temp123-prompt.inputs.json
 ```
 
 Without GitHub, from a local copy of this repo:
@@ -55,10 +55,14 @@ It also makes the first git commit on `main` (unless the folder is already a git
 2. Fill any `[FILL IN]` lines in `site-inputs.md`.
 3. Paste the Phase 0 prompt from `NEW-SITE-PROMPT.md` (Part F), then run Phases 1–5 in order.
 
+## Second brain (optional)
+
+Give the generator the path or repo URL of your knowledge vault (for example `service-area-second-brain`, https://github.com/wesoon123/service-area-second-brain) and the site's rules tell Claude to read `places/<state>/<place>.md` before researching a place, and to write new sourced facts back. Leave it blank for `none`. Existing sites get the rule with `sync`, then add the `Second brain vault:` line to `site-inputs.md`.
+
 ## Update an existing site to the latest kit
 
 ```bash
-npx github:[OWNER]/trailer-site-kit sync ../temp123-prompt
+npx github:wesoon123/trailer-site-kit sync ../temp123-prompt
 ```
 
 Replaces the skills, `NEW-SITE-PROMPT.md` and the kit block in `AGENTS.md` with the kit's versions. It never touches `site-inputs.md` or `src/data`, and keeps a customized `DESIGN.md` unless you add `--design`.

@@ -164,6 +164,7 @@ const FIELDS = [
   { key: 'photos', label: 'Real photo folder' },
   { key: 'brandColors', label: 'Brand colors / logo', def: () => 'Part C defaults' },
   { key: 'examplePages', label: 'Team example pages' },
+  { key: 'vault', label: 'Second brain vault: folder path or repo URL (blank for none)' },
 ];
 
 function normalize(raw) {
@@ -269,6 +270,7 @@ function siteInputsMarkdown(a) {
     ['Real photo folder:', or(a.photos)],
     ['Brand colors / logo:', a.brandColors],
     ['Team example pages:', or(a.examplePages)],
+    ['Second brain vault:', or(a.vault, 'none')],
   ];
   const body = rows.map(([k, v]) => `${k.padEnd(29)}${v}`).join('\n');
   const today = new Date().toISOString().slice(0, 10);
@@ -320,6 +322,7 @@ Before any work in this repo, read:
 1. \`site-inputs.md\`: this site's facts. Never invent a fact that it or the equipment directory does not give; ask or mark it missing.
 2. \`NEW-SITE-PROMPT.md\`: the rules, every page on the site, and the build phases (Part F).
 3. \`DESIGN.md\`: visual direction and the approved page layouts.
+4. The second brain vault named in \`site-inputs.md\` (if not \`none\`): read its \`places/<state>/<place>.md\` note before researching a place, and write new sourced facts back to it.
 
 Build pages only with the skills in \`.agents/skills/\`:
 - Homepage: \`state-trailer-homepage-builder\`
