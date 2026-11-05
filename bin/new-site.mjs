@@ -78,7 +78,7 @@ Usage:
   new-trailer-site sync <folder> [--design]
 
 create   Make <folder> (or add to an existing project) with:
-           .agents/skills/        the three page-building skills
+           .agents/skills/        the page-building skills (homepage, equipment, service area, calculator)
            NEW-SITE-PROMPT.md     master prompt with the build phases
            DESIGN.md              visual direction
            AGENTS.md, CLAUDE.md   tell Codex and Claude to read the kit first
@@ -182,6 +182,7 @@ const FIELDS = [
   { key: 'split', label: 'Keyword split primary / secondary / other', def: () => '70 / 15 / 15' },
   { key: 'units', label: 'Units you rent and where (blank to fill in later)' },
   { key: 'extraRates', label: 'Rates not in the equipment directory (blank for none)' },
+  { key: 'deliveryRates', label: 'Starting delivery price by trailer length, e.g. 20 ft $995, 40 ft $2,995 (blank for none)' },
   {
     key: 'homepageMap',
     label: 'Homepage map: USA incident map or state map',
@@ -312,6 +313,7 @@ function siteInputsMarkdown(a) {
     ['Keyword split:', a.split],
     ['Units we rent and where:', or(a.units, `${FILL}: units confirmed per category, and the states they serve`)],
     ['Extra rates:', or(a.extraRates, 'none')],
+    ['Delivery rates:', or(a.deliveryRates, 'none (delivery quoted per job)')],
     ['Homepage map:', a.homepageMap],
     ['Focus states:', a.scope === 'state' ? 'n/a (state site)' : a.focusStates],
     ['State build order:', a.scope === 'state' ? 'n/a (state site)' : a.stateOrder],
@@ -354,6 +356,27 @@ function usStatesSkeleton(a) {
   };
 }
 
+function pricingSkeleton(a) {
+  const rank = (n) => (n === superNumber(a.primary) ? 1 : n === superNumber(a.secondary) ? 2 : 3);
+  return {
+    updated: '',
+    source: 'super-9-equipment-directory.md + site-inputs.md (Extra rates, Delivery rates)',
+    about: 'Filled by state-trailer-calculator-builder from the price list. starting is null when the directory lists no rate. Never hardcode prices elsewhere.',
+    focus: [superNumber(a.primary), superNumber(a.secondary)].filter(Boolean),
+    categories: SUPER9.map((label, i) => ({
+      super9: i + 1,
+      label,
+      rented: null,
+      focusRank: rank(i + 1),
+      starting: null,
+      lengths: [],
+      statesConfirmed: [],
+    })),
+    delivery: [],
+    notes: [],
+  };
+}
+
 function stateManifestSkeleton(a) {
   const [abbr, name] = findState(a.homeState);
   return {
@@ -382,6 +405,7 @@ Build pages only with the skills in \`.agents/skills/\`:
 - Homepage: \`state-trailer-homepage-builder\`
 - Equipment pages: \`state-trailer-equipment-pages-builder\`
 - Service Area pages (USA map, states, hub cities, places): \`state-trailer-service-area-builder\`
+- Rental calculator page and floating estimate modal: \`state-trailer-calculator-builder\`. Prices come only from the price list, never hardcoded.
 
 Navigation on every page: Home | Equipment | Service Area | Use cases | About Us | Contact Us.
 
@@ -497,6 +521,9 @@ async function create(target, flags) {
   }
   if (await writeIfMissing(join(dir, `src/data/service-areas/${stateSlug}.json`), `${JSON.stringify(stateManifestSkeleton(answers), null, 2)}\n`, force)) {
     written.push(`src/data/service-areas/${stateSlug}.json`);
+  }
+  if (await writeIfMissing(join(dir, 'src/data/pricing.json'), `${JSON.stringify(pricingSkeleton(answers), null, 2)}\n`, force)) {
+    written.push('src/data/pricing.json (calculator prices, filled in Phase 2b)');
   }
   if (await writeIfMissing(join(dir, 'src/data/research/README.md'), '# Research logs\n\nOne file per location page: `[state]/[city]/[place].md`, one line per fact: fact, category, source URL, publication date, access date. "None found" is a valid entry; invented facts are not.\n', force)) {
     written.push('src/data/research/README.md');

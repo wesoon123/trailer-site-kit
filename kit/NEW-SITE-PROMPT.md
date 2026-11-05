@@ -3,7 +3,7 @@
 Use this for every new site. It tells Claude or Codex what the site is, how it is built, how it looks, every page it needs, and the order to build them in.
 
 **How to use**
-1. Run `new-trailer-site create <folder>` from trailer-site-kit. It puts this file, the skills, `DESIGN.md`, and a filled-in `site-inputs.md` (Part A) in the new repo. Without the kit: put this file in the repo root as `NEW-SITE-PROMPT.md` and the three skills in `.agents/skills/` (Codex) or add them to Claude.
+1. Run `new-trailer-site create <folder>` from trailer-site-kit. It puts this file, the skills, `DESIGN.md`, and a filled-in `site-inputs.md` (Part A) in the new repo. Without the kit: put this file in the repo root as `NEW-SITE-PROMPT.md` and the skills in `.agents/skills/` (Codex) or add them to Claude.
 2. Fill in Part A (or the `[FILL IN]` lines in `site-inputs.md`).
 3. Run the phases in Part F in order, one phase per session, pasting each phase's prompt as written.
 
@@ -28,6 +28,7 @@ Secondary rental service:    (Super 9 category name and #)
 Keyword split:               primary / secondary / other   (default 70 / 15 / 15)
 Units we rent and where:     (per category: unit names, states where confirmed)
 Extra rates:                 (anything not in the equipment directory)
+Delivery rates:              (starting delivery price by trailer length, or none; feeds the calculator)
 Homepage map:                USA incident map | state map
 Focus states:                (up to 6 states to highlight on the USA map; the rest stay gray)
 State build order:           (national sites; default: focus states first, then by demand)
@@ -55,6 +56,7 @@ Secondary rental service:    Commercial Dishwashing (#2)
 Keyword split:               60 / 30 / 10
 Units we rent and where:     [laundry and dishwashing units confirmed for Florida]
 Extra rates:                 [laundry rates, if any]
+Delivery rates:              [by trailer length, or none]
 Homepage map:                USA incident map
 Focus states:                Florida, Texas, Utah, Wyoming
 State build order:           Florida first, then [next states]
@@ -186,8 +188,8 @@ Four fixed elements keep a call or a quote one tap away. All are original to thi
 - **Quote drawer** (right side on desktop, full-screen sheet on mobile): a dialog with a focus trap, Esc to close, and focus returned to the opener. Fields: name, phone, email, state and city, equipment (the Super 9 list), project details (optional), a consent checkbox linking the Privacy Notice, and a hidden honeypot field ("Company website"). Real validation, posts to the approved destination (Part B), shows a clear success or failure message, and always repeats "or call [phone]". Never pretend it sent.
 - **Floating emergency call** (bottom right, 16 px from the edges): a red pill at least 56 px tall with white text (`--color-emergency`), a small pulsing status dot, a small top line, and "Call now" below. It is a `tel:` link with `aria-label="Call [brand] now: [phone]"`. Top line: **"Emergency call · 24/7"** when Part A "Phone answered 24/7" is yes, otherwise "Rental line · Call now". Never write "Emergency" or "24/7" unless verified (Part E rule 13).
   - **Glow so visitors notice it:** a soft red halo ring (`--color-emergency-glow`) expands about 14 px and fades, 2.4 s, ease-out, repeating, with the dot breathing in step. Pure CSS (`box-shadow` keyframes). It pauses on hover and focus, never flashes faster than once a second, and with `prefers-reduced-motion: reduce` it becomes a static 2 px ring. This is the one glow allowed on the site.
-- **Optional "Rental guide" pill** (bottom left, navy): only when a guide or articles page exists; links to it.
-- **Mobile** (under 768px): hide the left rail and the floating pill. Use one fixed bottom bar, 56 px plus the safe-area inset: a red glowing **Call now** button on the left and a navy **Get a Quote** button on the right that opens the drawer. Add matching bottom padding to the page so the bar never covers content.
+- **Floating "Calculate estimate" pill** (bottom left, navy, calculator icon): opens the estimate modal (section 7b). Hidden on the calculator page. An optional "Rental guide" pill may stack above it, only when a guide or articles page exists.
+- **Mobile** (under 768px): hide the left rail and the floating pill. Use one fixed bottom bar, 56 px plus the safe-area inset: a red glowing **Call now** button on the left and a navy **Estimate** button on the right that opens the estimate modal (which also holds the quote request). Add matching bottom padding to the page so the bar never covers content.
 - **Rules:** stack above content and below any open dialog; stack above a cookie banner and never hide it; never cover form fields, the footer phone, or text; hide in print; no layout shift (fixed positioning only); client components are the rail, drawer, and floating call only.
 
 ### 5. Homepage (homepage skill's 15 sections → pattern)
@@ -261,8 +263,21 @@ In this order:
 - **Spec lists and comparison tables:** white cards, striped rows, category group rows. On mobile, scroll horizontally inside the table only, with a sticky first column.
 - **Long-form text:** 72–75ch max, H3 every 150–250 words, short facts in callout boxes with an icon badge.
 
+#### 7b. Rental calculator and estimate modal
+Page `/rental-calculator/`, built with `state-trailer-calculator-builder`. The structure follows common rental-calculator practice; the look is this kit's own.
+1. Shared chrome and breadcrumb "Home › Rental calculator".
+2. Hero (`--color-surface`): eyebrow "PROJECT PLANNING", H1 "[Brand] Rental and Delivery Calculator", 2-sentence intro, and a notice chip "Planning estimate, not a final quote" with one line saying dates do not change the estimate.
+3. Two columns. **Left, form card** (white, rounded 24px, 1px border): eyebrow "STARTING ESTIMATE", H2 "Tell us what your site needs.", then: State and City side by side, ZIP (optional), Equipment type (full width), Trailer length and Number of people side by side, Rental start and end dates side by side, a lime `CtaButton` "Calculate Starting Estimate →", and the line "Starting estimate calculated. No contact information was sent." after a result. **Right, "Preliminary total" card** (`--color-accent-tint`, sticky on desktop): eyebrow, the total in 48px bold `--color-navy-800`, two rows (Equipment starting price, Starting delivery), the disclaimer, and a phone link "Call [phone] to request a quote". With no result yet it says "Choose your equipment".
+4. **Optional exact quote** below the form: name, phone, email, industry, project details, honeypot, consent. Heading note: "Your estimate does not send your information."
+5. **Published starting prices:** two tables (Equipment, then Trailer delivery when delivery rates exist) from `pricing.json`, in the focus order, with "Prices updated [date]".
+6. FAQs, final CTA band, footer.
+
+**Estimate modal (floating):** a navy pill fixed bottom left, "Calculate estimate" with a calculator icon, on every page except the calculator page. It opens a dialog with the same form and result card (stacked on mobile), the optional quote request, and "Open the full calculator →". On the homepage the hero's secondary button opens it too. It never opens automatically.
+
+**Prices:** only from the price list (directory, Extra rates, Delivery rates), in the trailer-focus order, never hardcoded. No rate means "Request a quote". See the calculator skill for the full rules.
+
 ### 8. Components to build once (Next.js + TypeScript)
-`TopBar`, `SiteHeader` (accessible mobile menu, sticky phone button), `StickyContact` (left rail, floating emergency call, mobile bottom bar), `QuoteDrawer`, `Breadcrumbs`, `Hero`, `PageHero`, `PlaceHero`, `WaveDivider`, `SectionHeading` (eyebrow + two-tone heading), `CtaButton`, `IconBadge`, `FactsStrip`, `EquipmentFeature`, `EquipmentChips`, `QuoteForm`, `RateTable`, `SpecTable`, `DataPointTimeline`, `InfoCardPair`, `NearbyPlaces`, `StepList`, `TestimonialCarousel` (renders nothing without real reviews), `UsIncidentMap` + `StatePanel` (client), `StateIncidentList` (server), `StateMap` (client), `PlaceList` (server), `FaqAccordion`, `CtaBand`, `SiteFooter`.
+`TopBar`, `SiteHeader` (accessible mobile menu, sticky phone button), `StickyContact` (left rail, floating emergency call, mobile bottom bar), `QuoteDrawer`, `EstimateForm` + `EstimateModal` (calculator), `Breadcrumbs`, `Hero`, `PageHero`, `PlaceHero`, `WaveDivider`, `SectionHeading` (eyebrow + two-tone heading), `CtaButton`, `IconBadge`, `FactsStrip`, `EquipmentFeature`, `EquipmentChips`, `QuoteForm`, `RateTable`, `SpecTable`, `DataPointTimeline`, `InfoCardPair`, `NearbyPlaces`, `StepList`, `TestimonialCarousel` (renders nothing without real reviews), `UsIncidentMap` + `StatePanel` (client), `StateIncidentList` (server), `StateMap` (client), `PlaceList` (server), `FaqAccordion`, `CtaBand`, `SiteFooter`.
 
 Only the menu, maps, forms, sticky contact, and carousel are client components. Everything else renders on the server.
 
@@ -295,6 +310,7 @@ Only the menu, maps, forms, sticky contact, and carousel are client components. 
 | State pages | `/service-area/[state]/` | 51 on national sites (50 states + DC); 1 on state sites | `state-trailer-service-area-builder` |
 | Hub cities | `/service-area/[state]/[city]/` | about 10–40 per state, each holding 10–20 places | `state-trailer-service-area-builder` |
 | Place pages | `/service-area/[state]/[city]/[place]/` | every incorporated municipality, plus counties, countryside, and unincorporated areas with real demand | `state-trailer-service-area-builder` |
+| Rental calculator | `/rental-calculator/` | 1, plus the floating estimate modal on every page | `state-trailer-calculator-builder` |
 | Use cases, About Us, Contact Us | existing routes | 1 each | Not covered by the skills yet; link only if they exist |
 
 - **Scale:** the U.S. has 19,489 municipal governments and 3,031 counties (U.S. Census Bureau, 2025). Florida alone has 411 municipalities (267 cities, 123 towns, 21 villages) in 67 counties.
@@ -334,6 +350,7 @@ The skills hold the full detail; these are the rules that never change.
 12. **No copy-paste pages:** no reused paragraphs across location pages except pricing, CTA, and specs; rewrite any page that shares more than about 30% of its 5-word phrases with another.
 13. **Truthful modifiers:** "emergency", "24/7", "leasing", and "ADA" only when verified.
 14. **Kermit's 18-point audit** on every batch, as each skill describes.
+15. **Estimates:** the calculator and modal show only published starting prices from the price list (directory, Extra rates, Delivery rates), in the trailer-focus order. A category with no listed rate shows "Request a quote". Never convert Daily, Weekly, and Monthly rates into each other, and never estimate a missing rate from another category. Every result says it is a planning estimate and sends nothing until a quote is requested.
 
 ---
 
@@ -367,6 +384,14 @@ Pages to build: Equipment hub + the primary and secondary category pages.
 ```
 Repeat with `Pages to build: [category] category page` for each other category the brand rents.
 
+### Phase 2b: Rental calculator
+```
+$state-trailer-calculator-builder
+Use site-inputs.md and NEW-SITE-PROMPT.md (Parts B–E). Design: DESIGN.md section 7b.
+Build /rental-calculator/, the floating estimate modal, and src/data/pricing.json from the price list in the Equipment skill's directory plus Extra rates and Delivery rates in site-inputs.md. Order equipment by the primary and secondary trailer focus.
+```
+To change prices later, update the directory or site-inputs.md and run the same skill with "Update prices only".
+
 ### Phase 3: USA map and state pages
 ```
 $state-trailer-service-area-builder
@@ -398,5 +423,5 @@ List unverified claims, held-back pages, missing photos, and redirect changes.
 - [ ] Part A filled in
 - [ ] Skills in `.agents/skills/` (Codex) or added to Claude
 - [ ] `NEW-SITE-PROMPT.md`, `DESIGN.md`, `site-inputs.md` in the repo root
-- [ ] Phases 0–5 run in order
+- [ ] Phases 0–5 run in order (Phase 2b is the calculator)
 - [ ] Preview shared with Kermit

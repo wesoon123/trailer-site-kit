@@ -13,6 +13,7 @@
   "split": "60 / 30 / 10",
   "units": "",
   "extraRates": "",
+  "deliveryRates": "",
   "homepageMap": "USA incident map",
   "focusStates": "Florida, Texas, Utah, Wyoming",
   "stateOrder": "Florida first, then by demand",

@@ -1,0 +1,3 @@
+interface:
+  display_name: "State Trailer Calculator Builder"
+  short_description: "Build the rental calculator page and floating estimate modal from the published price list."

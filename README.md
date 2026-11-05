@@ -1,6 +1,6 @@
 # trailer-site-kit
 
-One command to start a new trailer rental website repo with everything the team uses: the three page-building skills, the master prompt, the design, the site's details, and the data skeletons for the USA map and service areas.
+One command to start a new trailer rental website repo with everything the team uses: the page-building skills, the master prompt, the design, the site's details, and the data skeletons for the USA map and service areas.
 
 ## Start a new site
 
@@ -35,7 +35,8 @@ temp123-prompt/
 ├── .agents/skills/
 │   ├── state-trailer-homepage-builder/
 │   ├── state-trailer-equipment-pages-builder/
-│   └── state-trailer-service-area-builder/
+│   ├── state-trailer-service-area-builder/
+│   └── state-trailer-calculator-builder/
 ├── NEW-SITE-PROMPT.md        master prompt: rules, page map, build phases
 ├── DESIGN.md                 visual direction and approved page layouts
 ├── site-inputs.md            this site's details (Part A of the master prompt)
@@ -54,6 +55,10 @@ It also makes the first git commit on `main` (unless the folder is already a git
 1. Open the folder in Codex (or Claude).
 2. Fill any `[FILL IN]` lines in `site-inputs.md`.
 3. Paste the Phase 0 prompt from `NEW-SITE-PROMPT.md` (Part F), then run Phases 1–5 in order.
+
+## Rental calculator
+
+Every site gets `/rental-calculator/` and a floating "Calculate estimate" modal. Starting prices come only from the price list: the Super 9 equipment directory plus the Extra rates and Delivery rates in `site-inputs.md`, ordered by your primary and secondary trailer focus, and written to `src/data/pricing.json`. A category with no listed rate shows "Request a quote". To change prices, update the directory or `site-inputs.md` and run the calculator skill with "Update prices only".
 
 ## Sticky contact (every page)
 
@@ -81,7 +86,7 @@ Edit the files in `kit/`, then commit and push. Every worker's next `create` use
 
 ```
 kit/
-├── skills/            the three skills (each folder = one skill)
+├── skills/            the skills (each folder = one skill)
 ├── NEW-SITE-PROMPT.md
 └── DESIGN.md
 ```
