@@ -161,6 +161,12 @@ const FIELDS = [
   },
   { key: 'dispatch', label: 'Verified dispatch locations (e.g. City, ST)' },
   { key: 'phone', label: 'Phone' },
+  {
+    key: 'hours247',
+    label: 'Is the phone answered 24/7? yes or no (controls the "Emergency call 24/7" button)',
+    def: () => 'no',
+    check: (v) => ['yes', 'no'].includes(v.toLowerCase()) || 'Type yes or no.',
+  },
   { key: 'email', label: 'Email' },
   {
     key: 'primary',
@@ -212,6 +218,7 @@ function normalize(raw) {
     a[f.key] = v === undefined || v === null ? '' : String(v).trim();
   }
   a.scope = (a.scope || 'national').toLowerCase();
+  if (a.hours247) a.hours247 = a.hours247.toLowerCase();
   const focus = parseFocus(a.focusStates);
   if (focus) a.focusStates = focus.map((s) => s[1]).join(', ');
   for (const f of FIELDS) {
@@ -298,6 +305,7 @@ function siteInputsMarkdown(a) {
     ['Home state / abbreviation:', `${stateName} / ${abbr}`],
     ['Verified dispatch locations:', or(a.dispatch)],
     ['Phone:', or(a.phone)],
+    ['Phone answered 24/7:', a.hours247 || 'no'],
     ['Email:', or(a.email)],
     ['Primary rental service:', service(a.primary)],
     ['Secondary rental service:', service(a.secondary)],

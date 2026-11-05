@@ -55,6 +55,10 @@ It also makes the first git commit on `main` (unless the folder is already a git
 2. Fill any `[FILL IN]` lines in `site-inputs.md`.
 3. Paste the Phase 0 prompt from `NEW-SITE-PROMPT.md` (Part F), then run Phases 1–5 in order.
 
+## Sticky contact (every page)
+
+New sites get a sticky contact system: a header phone button, a left "Need a rental? Contact now" rail that opens a quote drawer, a glowing emergency call button at the bottom right, and a mobile bottom bar. The generator asks whether the phone is answered 24/7; the button says "Emergency call · 24/7" only if you answer yes. Details are in `kit/DESIGN.md` section 4.
+
 ## USA map: focus states
 
 The generator asks which states to focus on (up to 6, default: the home state). On the `/service-area/` USA map only those states are highlighted, each in its Census division color; every other state stays gray. Region pills (West, Midwest, South, Northeast) and Featured pills (the focus states) filter the map. The layout is in `kit/DESIGN.md` section 6, and the data is `src/data/us-states.json` (each state has `region`, `division` and `focus`).
