@@ -348,7 +348,7 @@ The skills hold the full detail; these are the rules that never change.
 10. **Trailer specifications block** at the bottom of every location page.
 11. **Quality gate:** a location page goes live only when data points 1–4 each have a sourced fact and at least three local-knowledge categories have real findings. Otherwise the place stays map-only, served by its hub page.
 12. **No copy-paste pages:** no reused paragraphs across location pages except pricing, CTA, and specs; rewrite any page that shares more than about 30% of its 5-word phrases with another.
-13. **Truthful modifiers:** "emergency", "24/7", "leasing", and "ADA" only when verified.
+13. **Truthful modifiers:** "emergency", "24/7", "leasing", "ADA", "luxury", "VIP", and "deluxe" only when verified for the unit (see the keyword matrix, Tier modifiers).
 14. **Kermit's 18-point audit** on every batch, as each skill describes.
 15. **Estimates:** the calculator and modal show only published starting prices from the price list (directory, Extra rates, Delivery rates), in the trailer-focus order. A category with no listed rate shows "Request a quote". Never convert Daily, Weekly, and Monthly rates into each other, and never estimate a missing rate from another category. Every result says it is a planning estimate and sends nothing until a quote is requested.
 

@@ -99,12 +99,12 @@ Kermit's requirement: a USA map where **every state shows its own, different loc
   - "Miami Mobile Laundry & Dishwashing Trailer Rentals"
   - State hub: "Florida Mobile Laundry Trailer Service Areas"
   - USA index: "United States Mobile Laundry Trailer Service Areas"
-  - Shower or shower/restroom combination sites: put the place first, then shower trailer, shower and restroom combination, and ADA combination shower trailer (Kermit's rule).
+  - Shower or shower/restroom combination sites: put the place first, then shower trailer, shower and restroom combination, and ADA combination shower trailer (Kermit's rule; mention ADA only when the brand rents ADA units). The marketing family (shower trailer, ADA shower and bathroom combination, laundry, bunkbed) is city first with geographical intent: directions and landmarks for the place.
 - **Keyword split:** follow `[KEYWORD_SPLIT]` (for example 60% laundry, 30% dishwashing, 10% the rest of the Super 9). Measure by share of body words and report it. The "other" share leans on the primary's family (see keyword matrix).
 - **Detail paragraphs:** every detail paragraph is **150–200 words**, with **1–3 equipment keywords** and **at least 1 place name** (this page's place or a nearby municipality). This applies to the data points, local knowledge, logistics, and climate sections.
 - **Word count:** about 2,000–2,200 words of visible body text per landing page. Exclude navigation, footer, the map's place list, tables, and the trailer specifications block. State the counting method in the audit.
 - **Location + keyword density:** one location + equipment keyword combination for every 50 words (about 40–44 per page). One combination = one sentence naming a specific place together with a Super 9 equipment keyword. Vary phrasing naturally. Never put combinations in hidden text, footers, alt-text lists, or keyword blocks. If hitting the ratio makes a sentence unnatural, rewrite the sentence instead of stuffing it. Report the actual ratio.
-- **Modifiers:** use only modifiers that are true for the brand: "emergency" only if emergency service is verified, "leasing" only if offered, "ADA" only for ADA units, "24/7" only if verified.
+- **Modifiers:** use only modifiers that are true for the brand: "emergency" only if emergency service is verified, "leasing" only if offered, "ADA" only for ADA units, "luxury", "VIP" and "deluxe" only for units that really carry them (keyword matrix, Tier modifiers), "24/7" only if verified.
 - **Main uses:** laundry, kitchens, and dishwashing are framed around temporary facilities during renovation, construction, outages, and workforce or recovery camps. Refrigeration is framed as emergency (every walk-in failure is an emergency call).
 
 ## Local knowledge and real rental situations

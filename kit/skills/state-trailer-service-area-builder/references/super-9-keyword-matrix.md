@@ -1,15 +1,33 @@
 # Super 9 Keyword Matrix
 
-Keyword names, modifiers, and intent for each Super 9 category, from the team's Part 3 notes and Kermit's directions doc. Use only modifiers that are true for the brand: "emergency" only with verified emergency service, "leasing" only if offered, "ADA" only for ADA units. Never paste these lists into page copy, headings, alt text, or hidden blocks.
+Keyword names, modifiers, and intent for each Super 9 category, from the team's Part 3 notes and Kermit's directions doc. Use only modifiers that are true for the brand: "emergency" only with verified emergency service, "leasing" only if offered, "ADA", "luxury", "VIP" and "deluxe" only for units that really are (see Tier modifiers below). Never paste these lists into page copy, headings, alt text, or hidden blocks.
 
 ## Common modifiers (all categories)
 trailer rentals, trailers for rent, trailer leasing, temporary facilities, commercial, modular, mobile, temporary, portable, emergency, onsite, short term or long term, during construction, construction site, renovation, basecamps and man camps, industrial clean up
 
+## Tier modifiers: ADA, luxury, VIP, deluxe
+These describe a specific unit, so use them only for units that really carry them. Check the equipment directory; never apply one to a category by default.
+
+| Modifier | Real units in the directory | Where it belongs |
+|---|---|---|
+| **ADA** | 3 Stall + 1 ADA Combination Trailer; 8 Stall + 1 ADA Combination Trailer (category 4) | The ADA combination block (4a) and any page that lists those units. Say "ADA accessible" only as the directory describes it (hydraulic lowering system, ramp, grab bars). Never claim certification or legal compliance the directory does not state. |
+| **Luxury** | 13ft, 22ft and 30ft Luxury Combination Trailers (category 4) | Combination pages and combination paragraphs. "Luxury LED lighting" on the 30ft restroom trailer is a feature, not a luxury tier. |
+| **VIP** | 20ft VIP Sleeper Trailer (category 8) | Sleeper pages and basecamp paragraphs. |
+| **Deluxe** | None named in the directory | Only as a synonym for luxury on the luxury combination units, or after a unit with that name is added to the directory. |
+
+Kermit's notes also list deluxe, VIP and luxury for the plain shower category (5). The directory has no such shower unit, so do not use them there until one is added and confirmed.
+
 ## Families (Kermit)
-- **Kitchen family:** Mobile Kitchen, Refrigeration, Dishwashing. Main use: temporary facilities during renovation and construction.
-- **Basecamp family:** Remote Basecamp / Man Camp / Workforce Housing, with Sleeper / Bunkhouse, Shower, Shower & Restroom Combination, Restroom, and Laundry as sub-keywords. Mention the sub-categories in basecamp paragraphs as sub-keywords.
+1. **Basecamp family:** Remote Basecamp / Man Camp / Workforce Housing, with Sleeper / Bunkhouse, Shower, Shower & Restroom Combination (including ADA and luxury combination), Restroom, and Laundry as sub-keywords. Mention all nine sub-categories in basecamp paragraphs as sub-keywords. Shared modifiers: services, rentals, temporary facilities, trailer rentals, trailers for rent, trailer leasing, modular, mobile, temporary, portable, emergency, onsite, short term or long term, industrial clean up, construction site, during construction, renovation.
+2. **Kitchen family:** Mobile Kitchen, Refrigeration, Dishwashing. Main use: temporary facilities during renovation and construction. Shared modifiers: trailer rentals, trailers for rent, trailer leasing, temporary facilities, commercial, modular, mobile, temporary, portable, emergency, construction site, onsite, during construction, renovation.
 
 When a site's primary service belongs to one family, the 15% balance leans on the rest of that family first.
+
+## Marketing family (city first, geographical intent)
+- **Marketing family 2:** Shower Trailer Rental, ADA Shower and Bathroom Combination, Laundry Trailer Rental, Bunkbed (sleeper) Trailer Rental.
+- **Rule:** city first. The place name leads the H1 and title, and the page carries geographical intent: directions, routes, and landmarks for that place (see the local-knowledge checklist).
+- Marketing family 1 was not included in the notes received. Add it here when the team supplies it.
+- Shared modifiers for the combination terms: trailer rentals, trailers for rent, trailer leasing, temporary facilities, modular, mobile, temporary, portable, emergency, onsite, short term or long term, during construction, construction site, renovation, basecamps and man camps.
 
 ---
 
@@ -35,13 +53,20 @@ When a site's primary service belongs to one family, the 15% balance leans on th
 
 ## 4. Shower & Restroom Bathroom Combination
 - **Names:** shower & restroom bathroom combination, mobile shower and restroom combination, portable shower restroom combination, bathroom
-- **Modifiers:** mobile, portable, modular, emergency, trailer rentals, trailers for rent, trailer leasing, temporary facilities, temporary, during construction, construction site, renovation
-- **Core target terms:** mobile shower restroom combination, luxury combination trailer, ADA combination shower restroom trailer
+- **Modifiers:** mobile, portable, modular, emergency, trailer rentals, trailers for rent, trailer leasing, temporary facilities, temporary, during construction, construction site, renovation; tier modifiers deluxe, VIP and luxury only for the luxury combination units (see Tier modifiers)
+- **Core target terms:** mobile shower restroom combination, luxury combination trailer, VIP luxury shower restroom trailer, ADA combination shower restroom trailer
 - **Primary intent:** integrated multi-stall bathroom and shower units for remote workforce sites, disaster recovery, and commercial facilities
-- **H1 rule (Kermit):** may need to say shower trailer, shower and restroom combination, and ADA combination shower trailer, all in the H1.
+- **H1 rule (Kermit):** may need to say shower trailer, shower and restroom combination, and ADA combination shower trailer, all in the H1. Mention ADA only when the brand rents the ADA units.
+
+### 4a. ADA combination (a specific trailer)
+- **Units:** 3 Stall + 1 ADA Combination Trailer; 8 Stall + 1 ADA Combination Trailer (equipment directory, category 4). Treat as its own unit group with its own keyword focus.
+- **Names:** ADA combination shower and restroom trailer, ADA restroom shower trailer combo, ADA accessible shower trailer, ADA shower and bathroom combination
+- **Modifiers:** the category 4 modifiers, plus accessible, compliant only as the directory words it
+- **Primary intent:** accessible shower and restroom access at construction sites, events, schools, public facilities, and disaster recovery sites
+- **Priority:** Kermit's case study gives this term difficulty 5.0, the lowest of the combination terms (see the table below), so it is a good secondary target for sites that rent these units.
 
 ## 5. Shower / Mobile Shower / Portable Shower
-- **Modifiers:** emergency, mobile, portable, temporary, trailer rentals, trailers for rent, trailer leasing, building, modular, temporary facilities, onsite, short term or long term, during construction, construction site, renovation, basecamp, man camps
+- **Modifiers:** emergency, mobile, portable, temporary, trailer rentals, trailers for rent, trailer leasing, building, modular, temporary facilities, onsite, short term or long term, during construction, construction site, renovation, basecamp, man camps; deluxe, VIP and luxury only after a shower unit with that tier is added to the directory
 - **Core target terms:** mobile shower trailer, portable shower, emergency shower trailer, basecamp shower unit
 - **Primary intent:** dedicated shower units for man camps, construction camps, and industrial remediation teams
 - **H1 rule (Kermit):** may need to say shower trailer, shower and restroom combination, and ADA combination shower trailer, all in the H1.
@@ -58,7 +83,7 @@ When a site's primary service belongs to one family, the 15% balance leans on th
 
 ## 8. Sleeper / Bunkbed / Portable Sleeper / Portable Bunkbed
 - **Modifiers:** trailer rentals, trailers for rent, trailer leasing, temporary facilities, modular, mobile, temporary, portable, emergency, onsite, short term or long term, during construction, renovation, construction site, basecamps, man camps
-- **Core target terms:** mobile sleeper trailer, portable bunkbed trailer, bunkhouse trailer, contractor sleeper, containerized military berthing
+- **Core target terms:** mobile sleeper trailer, portable bunkbed trailer, bunkhouse trailer, contractor sleeper, VIP sleeper trailer (20ft VIP Sleeper only), containerized military berthing
 - **Primary intent:** temporary crew sleeping quarters for rotating shifts on construction and industrial remediation sites
 
 ## 9. Remote Man Camp Basecamp / Remote Workforce Housing
@@ -67,6 +92,7 @@ When a site's primary service belongs to one family, the 15% balance leans on th
 - **Core target terms:** remote man camp, workforce housing, basecamp life support services, multi-unit life support deployment
 - **Primary intent:** turnkey remote site infrastructure integrating kitchens, dining, sleeping, laundry, shower, and power support
 - **Note:** mention all sub-categories (sleeper/bunkhouse, shower, shower combination bathroom, restroom, laundry) as sub-keywords in basecamp paragraphs.
+- **Added use: emergency data center facility construction.** Kermit's notes add emergency data center facility construction as a basecamp use (services, rentals, temporary facilities). The notes point to a Google Doc for details that was not available when this matrix was updated; use the use case only with sourced local facts, and add the doc's findings here when someone supplies them.
 
 ---
 
@@ -81,3 +107,5 @@ From Kermit's directions doc. The doc does not name the tool or date, or say whe
 | Bathroom shower trailer combination rentals | ~200–350 | Extreme | 9.0 |
 | ADA restroom shower trailer combo combination rentals | ~150–300 | High | 5.0 |
 | Emergency shower trailer rentals | ~30–80 | Medium | 8.0 |
+
+Reading the table: lavatory trailers are the easiest (difficulty 3.0) but small; shower trailer rentals are the volume term (about 2,900–3,600) at difficulty 7.5; ADA combination is the easiest of the combination terms (5.0); bathroom shower combination is the hardest (9.0).

@@ -371,6 +371,7 @@ function pricingSkeleton(a) {
       starting: null,
       lengths: [],
       statesConfirmed: [],
+      variants: [],
     })),
     delivery: [],
     notes: [],

@@ -30,6 +30,9 @@ Follow `NEW-SITE-PROMPT.md` Part C (section 7b) and `DESIGN.md` section 7b for t
 8. **Disclaimer on every result:** starting prices exclude final rental length, taxes, permits, utilities, site preparation, setup, servicing, mileage, and other project charges unless confirmed in writing.
 9. **Show "Prices updated [date]"** from `pricing.json`.
 
+## Variants (ADA, luxury, VIP)
+Where the directory lists ADA, luxury, or VIP units with their own rates (for example the ADA combination trailers, the luxury combination trailers, the VIP sleeper), offer each as its own equipment option, grouped under its category, with its own starting price. Do not fold them into a category average. If two variants share one range, say so; if the directory flags a conflict for them, show "Request a quote" until it is resolved.
+
 ## Trailer focus
 Order the equipment select with the primary service first, the secondary second, then the other rented Super 9 categories. Tag the first two "Most requested" only if that is true (otherwise no tag). The published-prices table on the page uses the same order.
 
@@ -42,7 +45,8 @@ Order the equipment select with the primary service first, the secondary second,
   "categories": [
     { "super9": 7, "label": "Laundry Trailer", "slug": "laundry-trailers", "rented": true, "focusRank": 1,
       "starting": { "amount": 1250, "period": "Daily", "basis": "low end of published range" },
-      "lengths": ["24 ft"], "statesConfirmed": ["FL"] }
+      "lengths": ["24 ft"], "statesConfirmed": ["FL"],
+      "variants": [ { "label": "ADA Combination Trailer", "starting": null } ] }
   ],
   "delivery": [ { "length": "20 ft", "amount": 995 } ],
   "notes": []
