@@ -21,7 +21,7 @@ Site scope:                  national (USA map + every state) | state (one state
 Home state / abbreviation:   (the state the homepage and Equipment pages focus on)
 Verified dispatch locations:
 Phone:
-Phone answered 24/7:       yes | no  (controls "Emergency call 24/7" on the sticky call button)
+Phone answered 24/7:       yes | no  (controls any call-hours label)
 Email:
 Primary rental service:      (Super 9 category name and #)
 Secondary rental service:    (Super 9 category name and #)
@@ -82,7 +82,7 @@ Second brain vault:          [PATH OR REPO URL, or none]
 - Moved routes get permanent redirects in `next.config`.
 - Images: `next/image` with width, height, and descriptive alt text.
 - Fonts: Poppins and Inter through `next/font/google`.
-- Forms: a route handler or server action posting to the approved destination, with real validation. Never pretend a form works.
+- Forms: use a verified, approved submission destination with real validation and an end-to-end submission test. A static export cannot run a Next.js route handler or server action; use an approved external form endpoint or a separately supported backend. When neither exists, show a call-first inquiry checklist and request the missing destination. Never pretend a form works.
 - Client components (`'use client'`) only for the menu, maps, form, and carousel.
 - Done means `next build`, `tsc --noEmit`, and lint all pass with no errors and no `any` types.
 
@@ -121,8 +121,7 @@ Clean, confident B2B service brand: deep navy and white sections that alternate,
   --color-surface: #F7F7F8;       /* cards and alternate sections */
   --color-surface-2: #E9ECEC;     /* table stripes, source chips, research-slot tiles */
   --color-border: #DFDFE2;
-  --color-emergency: #C62828;      /* sticky emergency call button, white text (AA) */
-  --color-emergency-glow: rgba(198, 40, 40, 0.45);  /* its pulsing halo */
+  --color-call: #C62828;           /* persistent call action, white text (AA) */
 
   /* Type */
   --font-heading: "Poppins", system-ui, sans-serif;
@@ -178,21 +177,18 @@ Mobile < 640px · Tablet 640–1023px · Desktop ≥ 1024px. Design each separat
 8. **Card hover.** Surface card turns white, lifts (`--shadow-card-hover`), and shows an aqua bottom border. Respect `prefers-reduced-motion`.
 
 ### 4. Shared page chrome (every page)
-- **Top bar** (navy-900, 13px): dispatch line on the left (for example "Miami dispatch · U.S. inquiries"; "24/7" only if verified), phone in lime on the right.
-- **Header** (white, bottom border): wordmark left; nav exactly **Home | Equipment | Service Area | Use cases | About Us | Contact Us** (active item: 2px aqua underline); lime "Request Quote →" pill right. Wraps cleanly on mobile; accessible mobile menu.
-- **Breadcrumb** on every interior page, small, inside the hero.
-- **Footer** (navy-900): wordmark, brand line with city/state, phone in lime, the same six nav labels.
+- **Top bar, if useful:** show only a verified dispatch location or service fact; a location's presence in Part A does not imply a dispatch office. Phone and hours must match Part A.
+- **Header:** brand mark, nav exactly **Home | Equipment | Service Area | Use cases | About Us | Contact Us**, a visible `tel:` link, and a quote action only when it opens a working form. Use the site's brand system for its layout and active state. The mobile menu must be keyboard and touch accessible.
+- **Breadcrumb** on every interior page, placed to fit the page composition.
+- **Footer:** brand, verified contact details, and the same six nav labels.
 
 #### Sticky contact system (every page, built once in the shared layout)
-Four fixed elements keep a call or a quote one tap away. All are original to this kit; take the idea, never another site's layout, wording, or artwork.
-- **Header phone button** (desktop, 1024px and up): the header is sticky and shrinks on scroll. Beside the nav sits a dark pill with a small line "Call our team" and the phone number large beneath it, as a `tel:` link. Add ", 24/7" to the small line only when Part A "Phone answered 24/7" is yes.
-- **Left contact rail** (desktop and tablet): a dark navy tab fixed to the left edge, vertically centered, about 64 px wide, with a chat icon in a rounded tint square above the label "Need a rental? Contact now". Click or Enter opens the **Quote drawer**. It never opens by itself.
-- **Quote drawer** (right side on desktop, full-screen sheet on mobile): a dialog with a focus trap, Esc to close, and focus returned to the opener. Fields: name, phone, email, state and city, equipment (the Super 9 list), project details (optional), a consent checkbox linking the Privacy Notice, and a hidden honeypot field ("Company website"). Real validation, posts to the approved destination (Part B), shows a clear success or failure message, and always repeats "or call [phone]". Never pretend it sent.
-- **Floating emergency call** (bottom right, 16 px from the edges): a red pill at least 56 px tall with white text (`--color-emergency`), a small pulsing status dot, a small top line, and "Call now" below. It is a `tel:` link with `aria-label="Call [brand] now: [phone]"`. Top line: **"Emergency call · 24/7"** when Part A "Phone answered 24/7" is yes, otherwise "Rental line · Call now". Never write "Emergency" or "24/7" unless verified (Part E rule 13).
-  - **Glow so visitors notice it:** a soft red halo ring (`--color-emergency-glow`) expands about 14 px and fades, 2.4 s, ease-out, repeating, with the dot breathing in step. Pure CSS (`box-shadow` keyframes). It pauses on hover and focus, never flashes faster than once a second, and with `prefers-reduced-motion: reduce` it becomes a static 2 px ring. This is the one glow allowed on the site.
-- **Floating "Calculate estimate" pill** (bottom left, navy, calculator icon): opens the estimate modal (section 7b). Hidden on the calculator page. An optional "Rental guide" pill may stack above it, only when a guide or articles page exists.
-- **Mobile** (under 768px): hide the left rail and the floating pill. Use one fixed bottom bar, 56 px plus the safe-area inset: a red glowing **Call now** button on the left and a navy **Estimate** button on the right that opens the estimate modal (which also holds the quote request). Add matching bottom padding to the page so the bar never covers content.
-- **Rules:** stack above content and below any open dialog; stack above a cookie banner and never hide it; never cover form fields, the footer phone, or text; hide in print; no layout shift (fixed positioning only); client components are the rail, drawer, and floating call only.
+Use the reference site's *contact coverage*: phone visible at entry, a clear quote path, and an action still reachable after scrolling. The exact rail, drawer, floating-pill, color, icon, and mobile-bar arrangement are not required. Compose an original design from this site's `DESIGN.md`, and avoid multiple fixed controls competing in one viewport.
+- **Call:** show the verified number in the header and final CTA. Keep a `tel:` call action available when the header scrolls away. Label it "Call" or "Call about a rental" unless verified facts support more specific wording. Add "24/7" only when Part A says the phone is answered 24/7. Do not imply live staffing with a status dot, pulse, or glow.
+- **Quote entry:** provide one consistent way to reach the quote form from the hero, final CTA, and a persistent launcher when the form works. This can be an inline section, anchored panel, or a user-opened dialog. A dialog needs a title, focus trap, Escape close, and focus return. Do not open it automatically.
+- **Form:** ask for name, one usable reply method, location, equipment need, and requested dates or duration; make project details optional. Require both phone and email only if follow-up needs both. Use visible labels, useful input types, field errors, loading and success/failure states, and preserve entries on failure. Link a consent checkbox to a real Privacy Notice only when needed. Use only equipment options verified for the business. POST to the approved destination from Part B and test a real submission. If no destination exists, replace the form with a short call-first checklist; do not show inert fields or a fake success state.
+- **Mobile:** provide one compact persistent action area, with a call button and a quote button only when the form works. Use safe-area padding, at least 44 px targets, and reserve space so it never covers page content or the footer. Show the phone number where space permits without making the action ambiguous.
+- **Rules:** fixed controls stay above page content and below open dialogs, never cover navigation, text, form fields, or a cookie notice, and hide in print. Test keyboard, zoom, desktop, tablet, and mobile states. Use one verified number in every call link.
 
 ### 5. Homepage (homepage skill's 15 sections → pattern)
 
@@ -200,7 +196,7 @@ Four fixed elements keep a call or a quote one tap away. All are original to thi
 |---|---|---|---|
 | 01 | Header and navigation | Shared chrome | Exact six labels. |
 | 02 | Hero | Full-bleed real photo, navy overlay on the left, eyebrow, H1 with accent phrase, short paragraph, CTA, aqua-stroke wave | Real primary trailer photo. H1 max 4 lines on desktop. |
-| 03 | Quick rental inquiry | White card overlapping the hero bottom | Equipment type, city/ZIP, start date, duration, contact. Stacked on mobile. Real submission destination only. |
+| 03 | Quick rental inquiry | Form or call-first inquiry panel in an original placement | Ask only for details needed to follow up. Use a real destination; otherwise show a short checklist and call action. |
 | 04 | Equipment showcase | Featured card + smaller cards | **Not equal cards.** Primary service gets the large navy featured card, secondary a light card, the rest small linked chips, following the keyword split. |
 | 05 | Why choose us | Icon list + photo collage | Verified advantages only. |
 | 06 | Testimonials | Review cards | Genuine attributed reviews only; otherwise omit. No autoplay. |
@@ -219,7 +215,7 @@ Four fixed elements keep a call or a quote one tap away. All are original to thi
 ### 6. Service Area pages (approved layouts)
 
 #### USA map page `/service-area/` (national sites)
-1. Shared chrome: header with nav (**Home | Equipment | Service Area | Use cases | About Us | Contact Us**, current page underlined) and the dark Request Quote button.
+1. Shared chrome: header with nav (**Home | Equipment | Service Area | Use cases | About Us | Contact Us**, current page indicated), verified phone link, and a quote button only when it opens a working form.
 2. Hero (light `--color-surface` background, two columns): breadcrumb "Home › Service Area"; place-first H1 "United States [Primary Service] Service Areas"; a "DESCRIPTION · 2–3 SENTENCES" intro; dark "Get a Quote" and outlined "Call [Phone]" buttons. Right column: feature image, a real trailer photo (dashed placeholder until supplied).
 3. **By Region and Featured State** (white): H2, short intro, then two pill rows. **Region:** All, West, Midwest, South, Northeast. **Featured:** the site's focus states (Part A "Focus states"), for example Florida, Texas, Utah, Wyoming.
    - **Left, map card:** eyebrow "STATE / REGION MAP · CLICKABLE", a "State" select at top right (also the mobile and keyboard path), the map, and a legend (In selected region, Other regions, Featured state, Selected).
@@ -279,7 +275,7 @@ Page `/rental-calculator/`, built with `state-trailer-calculator-builder`. The s
 **Prices:** only from the price list (directory, Extra rates, Delivery rates), in the trailer-focus order, never hardcoded. No rate means "Request a quote". See the calculator skill for the full rules.
 
 ### 8. Components to build once (Next.js + TypeScript)
-`TopBar`, `SiteHeader` (accessible mobile menu, sticky phone button), `StickyContact` (left rail, floating emergency call, mobile bottom bar), `QuoteDrawer`, `EstimateForm` + `EstimateModal` (calculator), `Breadcrumbs`, `Hero`, `PageHero`, `PlaceHero`, `WaveDivider`, `SectionHeading` (eyebrow + two-tone heading), `CtaButton`, `IconBadge`, `FactsStrip`, `EquipmentFeature`, `EquipmentChips`, `QuoteForm`, `RateTable`, `SpecTable`, `DataPointTimeline`, `InfoCardPair`, `NearbyPlaces`, `StepList`, `TestimonialCarousel` (renders nothing without real reviews), `UsIncidentMap` + `StatePanel` (client), `StateIncidentList` (server), `StateMap` (client), `PlaceList` (server), `FaqAccordion`, `CtaBand`, `SiteFooter`.
+`TopBar` (only for verified facts), `SiteHeader` (accessible mobile menu and phone), `StickyContact` (one responsive call and quote access pattern), `QuoteForm` (only with an approved destination), `EstimateForm` + `EstimateModal` (calculator), `Breadcrumbs`, `Hero`, `PageHero`, `PlaceHero`, `WaveDivider`, `SectionHeading` (eyebrow + two-tone heading), `CtaButton`, `IconBadge`, `FactsStrip`, `EquipmentFeature`, `EquipmentChips`, `RateTable`, `SpecTable`, `DataPointTimeline`, `InfoCardPair`, `NearbyPlaces`, `StepList`, `TestimonialCarousel` (renders nothing without real reviews), `UsIncidentMap` + `StatePanel` (client), `StateIncidentList` (server), `StateMap` (client), `PlaceList` (server), `FaqAccordion`, `CtaBand`, `SiteFooter`. Add a dialog component only if this site's chosen quote interaction needs one.
 
 Only the menu, maps, forms, sticky contact, and carousel are client components. Everything else renders on the server.
 
@@ -287,7 +283,7 @@ Only the menu, maps, forms, sticky contact, and carousel are client components. 
 
 **Do**
 - Use real, licensed photos of the actual trailers, with descriptive alt text.
-- Keep one primary CTA per section and the phone number visible in the top bar, hero, and footer, plus the sticky contact system on every page.
+- Keep one primary CTA per section and the verified phone number visible in the header or top bar, hero, and footer, plus the sticky contact system on every page.
 - Make tap targets at least 44×44px and show visible focus states.
 - Keep hero copy short; let tables and lists carry specs.
 
@@ -295,7 +291,7 @@ Only the menu, maps, forms, sticky contact, and carousel are client components. 
 - Copy the inspiration's brand, logo motifs, vehicle wraps, photos, stats, or wording.
 - Put aqua `#13D6E0` text on white.
 - Style keywords differently on live pages.
-- Use generic gradients, decorative glows (the emergency call button's pulse is the only glow), autoplay carousels, popups or drawers that open by themselves, or fake reviews.
+- Use generic gradients, decorative glows, autoplay carousels, popups or drawers that open by themselves, or fake reviews.
 - Build equal-weight card walls for all Super 9 items.
 - Show a USA map on state, city, or place pages.
 
@@ -319,14 +315,14 @@ Only the menu, maps, forms, sticky contact, and carousel are client components. 
 - **Scale:** the U.S. has 19,489 municipal governments and 3,031 counties (U.S. Census Bureau, 2025). Florida alone has 411 municipalities (267 cities, 123 towns, 21 villages) in 67 counties.
 - **Every place gets its own page,** nested under its nearest hub city. Hub cities are chosen by size and demand, not by the words city, town, or village.
 - **Routes:** lowercase and hyphenated; add the county only when two places in a state share a name. Breadcrumbs mirror the route.
-- **Navigation, every page:** **Home | Equipment | Service Area | Use cases | About Us | Contact Us**, plus a Request Quote button.
+- **Navigation, every page:** **Home | Equipment | Service Area | Use cases | About Us | Contact Us**, plus a verified phone link and a Request Quote button when it opens a working form.
 - **Data files:** the Super 9 equipment directory and keyword matrix (inside the skills), `src/data/us-states.json` (USA map incidents), `src/data/service-areas/[state].json` (every place in the state), and a research log per location page. If Part A names a second brain vault, local facts come from it first and new research is written back to it.
 
 ### Details worth including (structure only, never the layout)
 Reference for structure and details: https://temporary123.com/ . Use it to decide which parts a strong rental site has. Do **not** copy its layout, wording, photos, icons, or brand; build every part in this kit's own design (Part C) with original copy.
-- **Hero:** two CTAs (Contact us; Find your rental, scrolling down), a phone card (add "24/7" only if verified), a feature card for the primary equipment, a short "equipment, site planning, delivery" strip, and four quick category links.
+- **Hero:** a working contact action and an equipment-discovery action, a visible phone option (add "24/7" only if verified), primary equipment emphasis, a short planning/delivery explanation, and relevant category links. Compose these elements for the site's own design rather than reproducing the reference positions.
 - **Find your facility:** the equipment grid with category filter chips and counts, and a "quick view" on each card.
-- **Starting-estimate calculator** (only when rates are published in the directory): state, city, optional ZIP, equipment, trailer length, number of people, and dates, adding published starting equipment and delivery rates. State plainly that the estimate sends nothing. Below it, an optional "request an exact quote" form with a consent checkbox and a honeypot. No published rate means "Request a quote".
+- **Starting-estimate calculator** (only when rates are published in the directory): state, city, optional ZIP, equipment, trailer length, number of people, and dates, adding published starting equipment and delivery rates. State plainly that the estimate sends nothing. Add an exact-quote form only with an approved submission destination; use consent and bot protection where needed. No published rate means "Request a quote" by the working contact path.
 - **Process:** three steps (tell us about the project, plan the setup, bring the details together) with a call line.
 - **Industries:** construction and workforce, food service and hospitality, government and public services, emergency and disaster response, each linking to the matching Use cases content.
 - **Service areas:** state select with the map (see the USA map page in Part C), plus browse-by-state lists.
@@ -376,7 +372,7 @@ Read NEW-SITE-PROMPT.md.
 $state-trailer-homepage-builder
 Use site-inputs.md and NEW-SITE-PROMPT.md (Parts B–E). Design: DESIGN.md.
 If "Homepage map" in site-inputs.md is "USA incident map", build section 08 as the USA map from DESIGN.md section 6 (focus states colored by region, all other states gray) instead of a state map.
-Add the sticky contact system (DESIGN.md section 4) to the shared layout so every page has it. Use "Phone answered 24/7" from site-inputs.md for the call-button label.
+Add the sticky contact system (DESIGN.md section 4) to the shared layout so every page has its own branded call access. Use "Phone answered 24/7" from site-inputs.md for any hours label. Add a quote form only with an approved, tested submission destination; otherwise use the call-first inquiry prompt.
 Build the homepage only.
 ```
 

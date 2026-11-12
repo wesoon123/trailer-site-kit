@@ -16,6 +16,8 @@ Act as a senior American B2B website architect, technical SEO specialist, local 
 - Local asset folder: `[LOCAL_ASSET_FOLDER]`
 - Repository: `[PROJECT_REPOSITORY]`
 - Verified phone/email: `[PHONE]` / `[EMAIL]`
+- Phone answered 24/7: verified yes/no from `site-inputs.md`
+- Approved quote-form destination and Privacy Notice route: verified URLs, if available
 - Optional approved Google Drive equipment folder: https://drive.google.com/drive/folders/1vQ4YVHz5H619Y1UqtX18vL0MQBiUHR73
 
 Never hardcode a particular state. Ask if the primary service cannot be determined from verified business information.
@@ -66,16 +68,26 @@ Keep incorporated cities/towns separate from counties, states, regions, metros, 
 ## Visual design standards
 Build a clean modern B2B design: spacious typography, strong authentic trailer photography, restrained branding, responsive grids, accessible CTAs, and meaningful visual hierarchy. Avoid generic gradients, glowing effects, repetitive card walls, overcrowded hero copy, intrusive overlays, fake reviews, and filler. Optimize desktop, tablet, and mobile separately.
 
+## Contact and call access
+Use the *function* of the reference rental site's contact system: a visible way to call, a clear way to request a quote, and persistent access as visitors scroll. Treat `NEW-SITE-PROMPT.md` Part C section 4 as a contact-coverage checklist, then design the composition, colors, shape, placement, copy, and motion for this site's own `DESIGN.md` and brand. Do not reproduce the reference site's header, left tab, drawer, floating pill, or mobile bar as a visual layout. Avoid stacking redundant fixed controls in one viewport.
+
+- Put the verified phone number in a `tel:` link in the header and at the final CTA. Keep a call action available after the header leaves view. On narrow screens, use one compact bottom action area with a call button and, when a working form exists, a quote button. Respect safe-area insets and reserve page padding so the controls cannot cover content or the footer.
+- Provide a quote entry near the hero and at the final CTA. When a working submission destination exists, the same form can be reached from these actions and from a persistent quote launcher. An inline section, anchored form, or deliberate dialog is acceptable; choose the layout that fits the homepage. A dialog must open only on request, trap focus, close with Escape, return focus, and expose its title and errors to assistive technology.
+- Keep the inquiry short: name, a usable reply method, city/ZIP or site location, equipment need, and requested dates or duration. Ask for phone and email together only when follow-up actually requires both. Make project details optional. Use visible labels, useful input types, autocomplete, field-level errors, an in-progress state, and an explicit success or failure message that preserves entered information on failure. Add a privacy/consent checkbox only when needed, linking to a real Privacy Notice. Do not use an unapproved list of equipment options.
+- A published form must POST to an approved, working destination and be tested end to end. A static export cannot rely on a Next.js route handler or server action; use an approved external endpoint or change the hosting architecture with authorization. If the destination is missing, do not publish a mock, disabled, or `mailto:` submission form. Present a short "have these details ready" prompt and the working phone action, record the missing destination, and ask for it so the form can be completed.
+- Use `Phone answered 24/7` from `site-inputs.md` for every hours label. When it is not verified yes, say "Call" or "Call about a rental" without "24/7", "always available", or an implied instant response. Use "emergency" only when the business has verified emergency service. A decorative live-status dot or pulse must not imply staffing or availability.
+- Keep persistent actions keyboard reachable, at least 44 px high, with visible focus and contrast. Hide fixed actions in print. Test desktop, tablet, mobile, open-menu/dialog states, long pages, and the footer for overlap. Call clicks must dial the same verified number everywhere.
+
 ## Required homepage wireframe — 15 sections
 
 ### 01. Header and navigation
-Logo, exact six navigation labels, and separate Request Quote CTA. Compact sticky behavior only if it does not obscure content. Accessible mobile menu.
+Logo, exact six navigation labels, a verified phone link, and a separate Request Quote CTA when a working form exists. Compact sticky behavior only if it does not obscure content. Accessible mobile menu. Apply the contact and call access rules above in the shared layout without creating an interior page.
 
 ### 02. Hero and primary CTA
-Two-column desktop composition: state-specific eyebrow, **one H1**, 50–90-word natural commercial description, primary quote CTA, optional emergency contact CTA, and real primary trailer photo with verified caption. State, service, and buyer action must be obvious immediately. Avoid long city lists in the hero.
+Two-column desktop composition: state-specific eyebrow, **one H1**, 50–90-word natural commercial description, primary quote or call CTA that works, optional urgent-contact CTA only when supported, and real primary trailer photo with verified caption. State, service, and buyer action must be obvious immediately. Avoid long city lists in the hero.
 
 ### 03. Quick rental inquiry
-Equipment type, city/ZIP, start date, duration, and contact details. Validate inputs and use a real approved submission destination. Never pretend a mock form works.
+Use the short working inquiry described above when an approved destination exists. If it does not, use this space for a concise checklist of equipment, location, dates, and site needs beside a working call action; do not show inputs that cannot submit.
 
 ### 04. Equipment showcase
 Real photos, clear names, practical benefits, verified specs, and links only to existing relevant destinations. Visually emphasize the primary rental family.
@@ -111,7 +123,7 @@ Concise and useful information on footprint, power, water, drainage, ventilation
 Direct answers to genuine state-specific buyer questions about pricing, delivery, rental terms, utilities, emergency availability, and equipment suitability. Avoid repetitive keyword answers.
 
 ### 15. Final CTA and footer
-Clear quote request asking for location, equipment, rental period, and requirements. Verified contact details. Footer uses the same six navigation labels; no extra menu categories.
+Clear quote request asking for location, equipment, rental period, and requirements, leading to the working form or verified call action. Verified contact details. Footer uses the same six navigation labels; no extra menu categories.
 
 ## Internal links and architecture
 Homepage is the commercial hub. Link naturally to **existing** equipment, service-area, use-case, and contact destinations. Do not generate those pages in this task. Avoid fake URLs, exact-match anchor repetition, or links that return 404.
@@ -145,7 +157,7 @@ Provide a separate, evidence-based report after building:
 18. **Low-DA focus:** when verified Moz DA <=10, score state and municipality homepage focus; if DA unknown, mark threshold unverified. Company strategy, not Google policy.
 
 ## Completion criteria
-Verify all business claims and equipment imagery; check spelling and municipality classification; validate map geometry and markers; test buttons and real form submission; inspect desktop/tablet/mobile; ensure no overlap or clipping; confirm **only homepage** was created and the menu labels are exact. Run the 18-point audit and report unresolved information honestly. A successful build alone is not completion.
+Verify all business claims and equipment imagery; check spelling and municipality classification; validate map geometry and markers; test buttons, `tel:` links, persistent actions, and real form submission when configured; inspect desktop/tablet/mobile; ensure no overlap or clipping; confirm **only homepage** was created and the menu labels are exact. Report a missing form destination as an unresolved input, never as a working form. Run the 18-point audit and report unresolved information honestly. A successful build alone is not completion.
 
 ## Deliverables
 - Production-ready homepage implementation
