@@ -36,7 +36,7 @@ The Super 9 Directory is the company's approved baseline for equipment categorie
 ## Strict scope and navigation
 Build **only the Equipment pages listed in `[EQUIPMENT_PAGES]`**. Do not create homepage, service-area, city, use-case, about, contact, or individual unit pages. Units are sections on their category page. Navigation labels and order must be exactly:
 
-**Home | Equipment | Service Area | Use cases | About Us | Contact Us**
+**Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us**
 
 Do not add other menu labels. The header may have a separate **Request Quote** button. Reuse the site's existing header, footer, and design components so Equipment pages match the homepage.
 
@@ -79,7 +79,7 @@ Clean modern B2B design matching the homepage: strong authentic unit photography
 ## Equipment hub wireframe — `/equipment/`
 The hub helps buyers pick the right equipment family and routes them to category pages. It must not duplicate the homepage equipment showcase word for word.
 
-1. **Header and navigation:** exact six labels plus Request Quote.
+1. **Header and navigation:** exact seven labels plus Request Quote.
 2. **Breadcrumb:** Home › Equipment.
 3. **Hero:** state-specific eyebrow, **one H1** with the primary rental family and `[STATE_NAME]`, 50–90-word intro, quote CTA, real photo.
 4. **Category directory:** one entry per category rented in the state: real photo, name, who it is for (one line), unit size range, rate range or Request a quote, link to the category page. Primary family first and visually emphasized.
@@ -89,10 +89,10 @@ The hub helps buyers pick the right equipment family and routes them to category
 8. **Pricing overview:** rate ranges by category, rate periods, and what affects price.
 9. **State coverage:** short municipality examples and a link to the Service Area page if it exists.
 10. **Equipment FAQs:** 4–6 direct answers on choosing a category, sizing, utilities, delivery, and quotes.
-11. **Final CTA and footer:** same six navigation labels.
+11. **Final CTA and footer:** same seven navigation labels.
 
 ## Category page wireframe — `/equipment/[category-slug]/`
-1. **Header and navigation:** exact six labels plus Request Quote.
+1. **Header and navigation:** exact seven labels plus Request Quote.
 2. **Breadcrumb:** Home › Equipment › [Category].
 3. **Hero:** **one H1** with the category and `[STATE_NAME]` (adjusted for the primary-service rule above), 50–90-word intro, quote CTA, optional emergency CTA, real unit photo with verified caption.
 4. **Quick rental inquiry:** category preselected, unit size dropdown from the verified lineup, city/ZIP, start date, duration, contact details. Validate inputs and use a real approved submission destination. Never pretend a mock form works.
@@ -104,7 +104,7 @@ The hub helps buyers pick the right equipment family and routes them to category
 10. **Emergency rental support:** strong emphasis for refrigeration, and relevant for kitchens, restrooms, and showers. Explain what information speeds an urgent quote. Advertise 24/7 only if verified; never promise immediate dispatch.
 11. **Related equipment:** cross-link natural pairs only to existing routes: kitchen ↔ dishwashing ↔ refrigeration; shower ↔ restroom ↔ shower/restroom combination; laundry ↔ sleeper ↔ remote man camp.
 12. **Category FAQs:** sizing, utilities, water/waste, delivery, rental length, and pricing. For permits or health inspections, say requirements vary by county or city and should be confirmed with the local authority; do not state specific rules unless verified.
-13. **Final CTA and footer:** quote request asking for location, unit, rental period, and site details; same six navigation labels.
+13. **Final CTA and footer:** quote request asking for location, unit, rental period, and site details; same seven navigation labels.
 
 **Remote Man Camp / Basecamp page:** treat it as a turnkey bundle page. Describe the integration listed in the directory, link to each component category page that exists, and use **Request a quote** (no rates are listed).
 

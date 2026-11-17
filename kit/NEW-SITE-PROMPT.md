@@ -180,9 +180,9 @@ Mobile < 640px · Tablet 640–1023px · Desktop ≥ 1024px. Design each separat
 
 ### 4. Shared page chrome (every page)
 - **Top bar, if useful:** show only a verified dispatch location or service fact; a location's presence in Part A does not imply a dispatch office. Phone and hours must match Part A.
-- **Header:** brand mark, nav exactly **Home | Equipment | Service Area | Use cases | About Us | Contact Us**, a visible `tel:` link, and a quote action only when it opens a working form. Use the site's brand system for its layout and active state. The mobile menu must be keyboard and touch accessible.
+- **Header:** brand mark, nav exactly **Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us**, a visible `tel:` link, and a quote action only when it opens a working form. Use the site's brand system for its layout and active state. The mobile menu must be keyboard and touch accessible.
 - **Breadcrumb** on every interior page, placed to fit the page composition.
-- **Footer:** brand, verified contact details, and the same six nav labels.
+- **Footer:** brand, verified contact details, and the same seven nav labels.
 
 #### Sticky contact system (every page, built once in the shared layout)
 Use the reference site's *contact coverage*: phone visible at entry, a clear quote path, and an action still reachable after scrolling. The exact rail, drawer, floating-pill, color, icon, and mobile-bar arrangement are not required. Compose an original design from this site's `DESIGN.md`, and avoid multiple fixed controls competing in one viewport.
@@ -196,7 +196,7 @@ Use the reference site's *contact coverage*: phone visible at entry, a clear quo
 
 | # | Skill section | Pattern | Adaptation rules |
 |---|---|---|---|
-| 01 | Header and navigation | Shared chrome | Exact six labels. |
+| 01 | Header and navigation | Shared chrome | Exact seven labels. |
 | 02 | Hero | Full-bleed real photo, navy overlay on the left, eyebrow, H1 with accent phrase, short paragraph, CTA, aqua-stroke wave | Real primary trailer photo. H1 max 4 lines on desktop. |
 | 03 | Quick rental inquiry | Form or call-first inquiry panel in an original placement | Ask only for details needed to follow up. Use a real destination; otherwise show a short checklist and call action. |
 | 04 | Equipment showcase | Featured card + smaller cards | **Not equal cards.** Primary service gets the large navy featured card, secondary a light card, the rest small linked chips, following the keyword split. |
@@ -210,14 +210,14 @@ Use the reference site's *contact coverage*: phone visible at entry, a clear quo
 | 12 | How rental works | 4 steps on navy | Inquire, select, review site, confirm quote and delivery. |
 | 13 | Technical planning guide | Light section | Checklist + spec table. |
 | 14 | FAQs | `<details>` accordion, first open | |
-| 15 | Final CTA and footer | Wave + navy CTA band, footer | Same six labels. |
+| 15 | Final CTA and footer | Wave + navy CTA band, footer | Same seven labels. |
 
 **Stats strip:** numbers only when verified. Otherwise factual tiles (for example "Daily, weekly and monthly rentals") or drop it.
 
 ### 6. Service Area pages (approved layouts)
 
 #### USA map page `/service-area/` (national sites)
-1. Shared chrome: header with nav (**Home | Equipment | Service Area | Use cases | About Us | Contact Us**, current page indicated), verified phone link, and a quote button only when it opens a working form.
+1. Shared chrome: header with nav (**Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us**, current page indicated), verified phone link, and a quote button only when it opens a working form.
 2. Hero (light `--color-surface` background, two columns): breadcrumb "Home › Service Area"; place-first H1 "United States [Primary Service] Service Areas"; a "DESCRIPTION · 2–3 SENTENCES" intro; dark "Get a Quote" and outlined "Call [Phone]" buttons. Right column: feature image, a real trailer photo (dashed placeholder until supplied).
 3. **By Region and Featured State** (white): H2, short intro, then two pill rows. **Region:** All, West, Midwest, South, Northeast. **Featured:** the site's focus states (Part A "Focus states"), for example Florida, Texas, Utah, Wyoming.
    - **Left, map card:** eyebrow "STATE / REGION MAP · CLICKABLE", a "State" select at top right (also the mobile and keyboard path), the map, and a legend (In selected region, Other regions, Featured state, Selected).
@@ -276,6 +276,14 @@ Page `/rental-calculator/`, built with `state-trailer-calculator-builder`. The s
 
 **Prices:** only from the price list (directory, Extra rates, Delivery rates), in the trailer-focus order, never hardcoded. No rate means "Request a quote". See the calculator skill for the full rules.
 
+### 7c. Pricing page
+Page `/pricing/`, built with `state-trailer-pricing-builder` from `src/data/pricing.json`. The look is this kit's own.
+1. Shared chrome and breadcrumb "Home › Pricing".
+2. Hero (`--color-surface`): eyebrow "PRICING", H1 "[Brand] Trailer Rental Pricing", two-sentence intro, and a notice chip "Rates depend on rental length and site".
+3. One rate table card per category (white, rounded 24px, 1px border) in the focus order: columns for each rental-length column from the sheet, striped rows, "Request a quote" where no rate exists. On mobile, scroll horizontally inside the table only, with a sticky first column.
+4. Add-on tables (water and waste service, delivery, kitchen, ramps, stairs, generators, turnkey per unit) in the same card style.
+5. "Prices updated [date]", the disclaimer, a phone link and the quote path (form only when a Form endpoint is set), FAQs (3–4), CTA band.
+
 ### 8. Components to build once (Next.js + TypeScript)
 `TopBar` (only for verified facts), `SiteHeader` (accessible mobile menu and phone), `StickyContact` (one responsive call and quote access pattern), `QuoteForm` (only with an approved destination), `EstimateForm` + `EstimateModal` (calculator), `Breadcrumbs`, `Hero`, `PageHero`, `PlaceHero`, `WaveDivider`, `SectionHeading` (eyebrow + two-tone heading), `CtaButton`, `IconBadge`, `FactsStrip`, `EquipmentFeature`, `EquipmentChips`, `RateTable`, `SpecTable`, `DataPointTimeline`, `InfoCardPair`, `NearbyPlaces`, `StepList`, `TestimonialCarousel` (renders nothing without real reviews), `UsIncidentMap` + `StatePanel` (client), `StateIncidentList` (server), `StateMap` (client), `PlaceList` (server), `FaqAccordion`, `CtaBand`, `SiteFooter`. Add a dialog component only if this site's chosen quote interaction needs one.
 
@@ -312,12 +320,14 @@ Only the menu, maps, forms, sticky contact, and carousel are client components. 
 | Place pages | `/service-area/[state]/[city]/[place]/` | every incorporated municipality, plus counties, countryside, and unincorporated areas with real demand | `state-trailer-service-area-builder` |
 | Man camp service tabs (when the brand rents Super 9 #9) | `/equipment/remote-man-camps/` plus 3 separate pages | 1 hub + 3 | `state-trailer-equipment-pages-builder` |
 | Rental calculator | `/rental-calculator/` | 1, plus the floating estimate modal on every page | `state-trailer-calculator-builder` |
-| Use cases, About Us, Contact Us | existing routes | 1 each | Not covered by the skills yet; link only if they exist |
+| Pricing | `/pricing/` | 1 | `state-trailer-pricing-builder` |
+| Contact Us | `/contact/` | 1: contact form (only with a Form endpoint) plus the 24/7 emergency call | Sticky contact system, DESIGN.md section 4 |
+| Use cases, About Us | existing routes | 1 each | Not covered by the skills yet; link only if they exist |
 
 - **Scale:** the U.S. has 19,489 municipal governments and 3,031 counties (U.S. Census Bureau, 2025). Florida alone has 411 municipalities (267 cities, 123 towns, 21 villages) in 67 counties.
 - **Every place gets its own page,** nested under its nearest hub city. Hub cities are chosen by size and demand, not by the words city, town, or village.
 - **Routes:** lowercase and hyphenated; add the county only when two places in a state share a name. Breadcrumbs mirror the route.
-- **Navigation, every page:** **Home | Equipment | Service Area | Use cases | About Us | Contact Us**, plus a verified phone link and a Request Quote button when it opens a working form.
+- **Navigation, every page:** **Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us**, plus a verified phone link and a Request Quote button when it opens a working form.
 - **Data files:** the Super 9 equipment directory and keyword matrix (inside the skills), `src/data/us-states.json` (USA map incidents), `src/data/service-areas/[state].json` (every place in the state), and a research log per location page. If Part A names a second brain vault, local facts come from it first and new research is written back to it.
 
 ### Details worth including (structure only, never the layout)
@@ -394,6 +404,14 @@ Build /rental-calculator/, the floating estimate modal, and src/data/pricing.jso
 ```
 To change prices later, update the directory or site-inputs.md and run the same skill with "Update prices only".
 
+### Phase 2c: Pricing page
+```
+/price-trailer
+Use site-inputs.md and NEW-SITE-PROMPT.md (Parts B–E). Design: DESIGN.md section 7c.
+Refresh prices from the price sheet (or the saved snapshot), then build /pricing/ from src/data/pricing.json. Ask me about any open question the skill lists before wording a rate.
+```
+To refresh prices later, run `/price-trailer` again.
+
 ### Phase 3: USA map and state pages
 ```
 $state-trailer-service-area-builder
@@ -425,5 +443,5 @@ List unverified claims, held-back pages, missing photos, and redirect changes.
 - [ ] Part A filled in
 - [ ] Skills in `.agents/skills/` (Codex) or added to Claude
 - [ ] `NEW-SITE-PROMPT.md`, `DESIGN.md`, `site-inputs.md` in the repo root
-- [ ] Phases 0–5 run in order (Phase 2b is the calculator)
+- [ ] Phases 0–5 run in order (Phase 2b is the calculator, Phase 2c the pricing page)
 - [ ] Preview shared with Kermit

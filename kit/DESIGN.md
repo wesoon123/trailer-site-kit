@@ -86,9 +86,9 @@ Mobile < 640px · Tablet 640–1023px · Desktop ≥ 1024px. Design each separat
 
 ## 4. Shared page chrome (every page)
 - **Top bar** (navy-900, 13px): dispatch line on the left (for example "Miami dispatch · U.S. inquiries"; "24/7" only if verified), phone in lime on the right.
-- **Header** (white, bottom border): wordmark left; nav exactly **Home | Equipment | Service Area | Use cases | About Us | Contact Us** (active item: 2px aqua underline); lime "Request Quote →" pill right. Wraps cleanly on mobile; accessible mobile menu.
+- **Header** (white, bottom border): wordmark left; nav exactly **Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us** (active item: 2px aqua underline); lime "Request Quote →" pill right. Wraps cleanly on mobile; accessible mobile menu.
 - **Breadcrumb** on every interior page, small, inside the hero.
-- **Footer** (navy-900): wordmark, brand line with city/state, phone in lime, the same six nav labels.
+- **Footer** (navy-900): wordmark, brand line with city/state, phone in lime, the same seven nav labels.
 
 ### Sticky contact system (every page, built once in the shared layout)
 Four fixed elements keep a call or a quote one tap away. All are original to this kit; take the idea, never another site's layout, wording, or artwork.
@@ -105,7 +105,7 @@ Four fixed elements keep a call or a quote one tap away. All are original to thi
 
 | # | Skill section | Pattern | Adaptation rules |
 |---|---|---|---|
-| 01 | Header and navigation | Shared chrome | Exact six labels. |
+| 01 | Header and navigation | Shared chrome | Exact seven labels. |
 | 02 | Hero | Full-bleed real photo, navy overlay on the left, eyebrow, H1 with accent phrase, short paragraph, CTA, aqua-stroke wave | Real primary trailer photo. H1 max 4 lines on desktop. |
 | 03 | Quick rental inquiry | White card overlapping the hero bottom | Equipment type, city/ZIP, start date, duration, contact. Stacked on mobile. Real submission destination only. |
 | 04 | Equipment showcase | Featured card + smaller cards | **Not equal cards.** Primary service gets the large navy featured card, secondary a light card, the rest small linked chips, following the keyword split. |
@@ -119,14 +119,14 @@ Four fixed elements keep a call or a quote one tap away. All are original to thi
 | 12 | How rental works | 4 steps on navy | Inquire, select, review site, confirm quote and delivery. |
 | 13 | Technical planning guide | Light section | Checklist + spec table. |
 | 14 | FAQs | `<details>` accordion, first open | |
-| 15 | Final CTA and footer | Wave + navy CTA band, footer | Same six labels. |
+| 15 | Final CTA and footer | Wave + navy CTA band, footer | Same seven labels. |
 
 **Stats strip:** numbers only when verified. Otherwise factual tiles (for example "Daily, weekly and monthly rentals") or drop it.
 
 ## 6. Service Area pages (approved layouts)
 
 ### USA map page `/service-area/` (national sites)
-1. Shared chrome: header with nav (**Home | Equipment | Service Area | Use cases | About Us | Contact Us**, current page underlined) and the dark Request Quote button.
+1. Shared chrome: header with nav (**Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us**, current page underlined) and the dark Request Quote button.
 2. Hero (light `--color-surface` background, two columns): breadcrumb "Home › Service Area"; place-first H1 "United States [Primary Service] Service Areas"; a "DESCRIPTION · 2–3 SENTENCES" intro; dark "Get a Quote" and outlined "Call [Phone]" buttons. Right column: feature image, a real trailer photo (dashed placeholder until supplied).
 3. **By Region and Featured State** (white): H2, short intro, then two pill rows. **Region:** All, West, Midwest, South, Northeast. **Featured:** the site's focus states (Part A "Focus states"), for example Florida, Texas, Utah, Wyoming.
    - **Left, map card:** eyebrow "STATE / REGION MAP · CLICKABLE", a "State" select at top right (also the mobile and keyboard path), the map, and a legend (In selected region, Other regions, Featured state, Selected).
@@ -184,6 +184,14 @@ Page `/rental-calculator/`, built with `state-trailer-calculator-builder`. The s
 **Estimate modal (floating):** a navy pill fixed bottom left, "Calculate estimate" with a calculator icon, on every page except the calculator page. It opens a dialog with the same form and result card (stacked on mobile), the optional quote request, and "Open the full calculator →". On the homepage the hero's secondary button opens it too. It never opens automatically.
 
 **Prices:** only from the price list (directory, Extra rates, Delivery rates), in the trailer-focus order, never hardcoded. No rate means "Request a quote". See the calculator skill for the full rules.
+
+### 7c. Pricing page
+Page `/pricing/`, built with `state-trailer-pricing-builder` from `src/data/pricing.json`. The look is this kit's own.
+1. Shared chrome and breadcrumb "Home › Pricing".
+2. Hero (`--color-surface`): eyebrow "PRICING", H1 "[Brand] Trailer Rental Pricing", two-sentence intro, and a notice chip "Rates depend on rental length and site".
+3. One rate table card per category (white, rounded 24px, 1px border) in the focus order: columns for each rental-length column from the sheet, striped rows, "Request a quote" where no rate exists. On mobile, scroll horizontally inside the table only, with a sticky first column.
+4. Add-on tables (water and waste service, delivery, kitchen, ramps, stairs, generators, turnkey per unit) in the same card style.
+5. "Prices updated [date]", the disclaimer, a phone link and the quote path (form only when a Form endpoint is set), FAQs (3–4), CTA band.
 
 ## 8. Components to build once (Next.js + TypeScript)
 `TopBar`, `SiteHeader` (accessible mobile menu, sticky phone button), `StickyContact` (left rail, floating emergency call, mobile bottom bar), `QuoteDrawer`, `EstimateForm` + `EstimateModal` (calculator), `Breadcrumbs`, `Hero`, `PageHero`, `PlaceHero`, `WaveDivider`, `SectionHeading` (eyebrow + two-tone heading), `CtaButton`, `IconBadge`, `FactsStrip`, `EquipmentFeature`, `EquipmentChips`, `QuoteForm`, `RateTable`, `SpecTable`, `DataPointTimeline`, `InfoCardPair`, `NearbyPlaces`, `StepList`, `TestimonialCarousel` (renders nothing without real reviews), `UsIncidentMap` + `StatePanel` (client), `StateIncidentList` (server), `StateMap` (client), `PlaceList` (server), `FaqAccordion`, `CtaBand`, `SiteFooter`.

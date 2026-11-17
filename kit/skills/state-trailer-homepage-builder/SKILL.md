@@ -28,7 +28,7 @@ Prefer the accessible **local asset folder** for speed, then authorized Google D
 ## Strict scope and navigation
 Build the **homepage only**. Do not create equipment, service-area, use-case, about, contact, city, or other interior pages. Navigation labels and order must be exactly:
 
-**Home | Equipment | Service Area | Use cases | About Us | Contact Us**
+**Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us**
 
 Do not add other menu labels. The header may have a separate **Request Quote** button. Link to verified existing routes only; otherwise document pending destinations without creating broken links. Homepage summaries of these subjects are permitted, but do not build their standalone page content.
 
@@ -81,7 +81,7 @@ Use the *function* of the reference rental site's contact system: a visible way 
 ## Required homepage wireframe — 15 sections
 
 ### 01. Header and navigation
-Logo, exact six navigation labels, a verified phone link, and a separate Request Quote CTA when a working form exists. Compact sticky behavior only if it does not obscure content. Accessible mobile menu. Apply the contact and call access rules above in the shared layout without creating an interior page.
+Logo, exact seven navigation labels, a verified phone link, and a separate Request Quote CTA when a working form exists. Compact sticky behavior only if it does not obscure content. Accessible mobile menu. Apply the contact and call access rules above in the shared layout without creating an interior page.
 
 ### 02. Hero and primary CTA
 Two-column desktop composition: state-specific eyebrow, **one H1**, 50–90-word natural commercial description, primary quote or call CTA that works, optional urgent-contact CTA only when supported, and real primary trailer photo with verified caption. State, service, and buyer action must be obvious immediately. Avoid long city lists in the hero.
@@ -123,7 +123,7 @@ Concise and useful information on footprint, power, water, drainage, ventilation
 Direct answers to genuine state-specific buyer questions about pricing, delivery, rental terms, utilities, emergency availability, and equipment suitability. Avoid repetitive keyword answers.
 
 ### 15. Final CTA and footer
-Clear quote request asking for location, equipment, rental period, and requirements, leading to the working form or verified call action. Verified contact details. Footer uses the same six navigation labels; no extra menu categories.
+Clear quote request asking for location, equipment, rental period, and requirements, leading to the working form or verified call action. Verified contact details. Footer uses the same seven navigation labels; no extra menu categories.
 
 ## Internal links and architecture
 Homepage is the commercial hub. Link naturally to **existing** equipment, service-area, use-case, and contact destinations. Do not generate those pages in this task. Avoid fake URLs, exact-match anchor repetition, or links that return 404.
