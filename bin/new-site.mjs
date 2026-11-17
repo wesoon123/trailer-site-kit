@@ -417,6 +417,7 @@ Build pages only with the skills in \`.agents/skills/\`:
 - Service Area pages (USA map, states, hub cities, places): \`state-trailer-service-area-builder\`
 - Rental calculator page and floating estimate modal: \`state-trailer-calculator-builder\`. Prices come only from the price list, never hardcoded.
 - Pricing page and price refresh (\`/price-trailer\`): \`state-trailer-pricing-builder\`. Only the published sheet tabs, never internal figures.
+- Free directory listings and the \`/directories-trailer-kit\` command: \`state-trailer-directories-builder\`. It reads and plans; the team submits each listing.
 
 Navigation on every page: Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us.
 

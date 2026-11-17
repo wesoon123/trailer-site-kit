@@ -68,6 +68,10 @@ Every site gets `/rental-calculator/` and a floating "Calculate estimate" modal.
 
 Every site gets `/pricing/`, built by `state-trailer-pricing-builder` from `src/data/pricing.json`. Run `/price-trailer` in Claude to refresh prices: it reads the public tabs of the team's price sheet, falls back to the saved snapshot (`references/pricing-source.md`) if the sheet cannot be read ("sheet unreachable, used snapshot dated ..."), rewrites the snapshot, rebuilds `pricing.json`, and updates the page. Only the published tabs go on the page: Tier 1 Pricelist rates, add-ons and turnkey unit rates. Government, GSA, Canada, tiers, markups and internal estimating tabs never publish, and the Basecamp price is held until the team confirms it.
 
+## Directory listings and `/directories-trailer-kit`
+
+`/directories-trailer-kit` runs `state-trailer-directories-builder`: it reads `site-inputs.md` and the saved directory checks, optionally re-checks the add-business pages read-only in the browser, and writes `directories/worklist.md` with the site's details ready to paste. It never submits a form or creates an account. The saved checks (`references/directory-checks.md`) cover 20 directories: none lists with no account, no email and no CAPTCHA, and listing by email alone does not exist, so the team submits each listing by hand.
+
 ## Sticky contact (every page)
 
 The default phone is +1 (800) 443-5212 and the 24/7 label is on by default. The quote form (drawer and Contact Us page) shows only when `Form endpoint:` in `site-inputs.md` holds a URL; otherwise visitors see the call-first prompt. New sites get a sticky contact system: a header phone button, a left "Need a rental? Contact now" rail that opens a quote drawer, a glowing emergency call button at the bottom right, and a mobile bottom bar. The generator asks whether the phone is answered 24/7; the button says "Emergency call · 24/7" only if you answer yes. Details are in `kit/DESIGN.md` section 4.
