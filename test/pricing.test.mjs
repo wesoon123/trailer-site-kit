@@ -37,3 +37,31 @@ test('/price-trailer command points to the pricing skill', () => {
   const text = read(join(KIT_ROOT, 'kit/commands/price-trailer.md'));
   assert.match(text, /state-trailer-pricing-builder/);
 });
+
+import { execFileSync } from 'node:child_process';
+import { rmSync } from 'node:fs';
+import { createSite } from './helpers.mjs';
+
+test('generated site gets the pricing skill, command and pricing.json fields', () => {
+  const site = createSite();
+  assert.ok(site.exists('.claude/commands/price-trailer.md'));
+  assert.ok(site.exists('.agents/skills/state-trailer-pricing-builder/SKILL.md'));
+  const pricing = JSON.parse(site.read('src/data/pricing.json'));
+  assert.deepEqual(Object.keys(pricing.snapshot).sort(), ['date', 'source']);
+  assert.ok(Array.isArray(pricing.addOns));
+  assert.equal(pricing.categories.length, 9);
+  for (const c of pricing.categories) assert.ok(Array.isArray(c.rates), `no rates on ${c.label}`);
+});
+
+test('sync restores a deleted command and the equipment photos', () => {
+  const site = createSite();
+  rmSync(join(site.dir, '.claude/commands/price-trailer.md'));
+  rmSync(join(site.dir, 'public/equipment'), { recursive: true });
+  execFileSync(process.execPath, [join(KIT_ROOT, 'bin', 'new-site.mjs'), 'sync', site.dir], { stdio: 'pipe' });
+  assert.ok(site.exists('.claude/commands/price-trailer.md'));
+  assert.ok(site.exists('public/equipment/24ft-mobile-kitchen'));
+});
+
+test('kit version is 1.7.0', () => {
+  assert.equal(JSON.parse(readFileSync(join(KIT_ROOT, 'package.json'), 'utf8')).version, '1.7.0');
+});

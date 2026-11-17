@@ -36,7 +36,11 @@ temp123-prompt/
 │   ├── state-trailer-homepage-builder/
 │   ├── state-trailer-equipment-pages-builder/
 │   ├── state-trailer-service-area-builder/
-│   └── state-trailer-calculator-builder/
+│   ├── state-trailer-calculator-builder/
+│   └── state-trailer-pricing-builder/
+├── .claude/commands/
+│   └── price-trailer.md      the /price-trailer command
+├── public/equipment/         the team's equipment photos, one folder per unit (WebP)
 ├── NEW-SITE-PROMPT.md        master prompt: rules, page map, build phases
 ├── DESIGN.md                 visual direction and approved page layouts
 ├── site-inputs.md            this site's details (Part A of the master prompt)
@@ -60,9 +64,13 @@ It also makes the first git commit on `main` (unless the folder is already a git
 
 Every site gets `/rental-calculator/` and a floating "Calculate estimate" modal. Starting prices come only from the price list: the Super 9 equipment directory plus the Extra rates and Delivery rates in `site-inputs.md`, ordered by your primary and secondary trailer focus, and written to `src/data/pricing.json`. A category with no listed rate shows "Request a quote". To change prices, update the directory or `site-inputs.md` and run the calculator skill with "Update prices only".
 
+## Pricing page and `/price-trailer`
+
+Every site gets `/pricing/`, built by `state-trailer-pricing-builder` from `src/data/pricing.json`. Run `/price-trailer` in Claude to refresh prices: it reads the public tabs of the team's price sheet, falls back to the saved snapshot (`references/pricing-source.md`) if the sheet cannot be read ("sheet unreachable, used snapshot dated ..."), rewrites the snapshot, rebuilds `pricing.json`, and updates the page. Only the published tabs go on the page: Tier 1 Pricelist rates, add-ons and turnkey unit rates. Government, GSA, Canada, tiers, markups and internal estimating tabs never publish, and the Basecamp price is held until the team confirms it.
+
 ## Sticky contact (every page)
 
-New sites get a sticky contact system: a header phone button, a left "Need a rental? Contact now" rail that opens a quote drawer, a glowing emergency call button at the bottom right, and a mobile bottom bar. The generator asks whether the phone is answered 24/7; the button says "Emergency call · 24/7" only if you answer yes. Details are in `kit/DESIGN.md` section 4.
+The default phone is +1 (800) 443-5212 and the 24/7 label is on by default. The quote form (drawer and Contact Us page) shows only when `Form endpoint:` in `site-inputs.md` holds a URL; otherwise visitors see the call-first prompt. New sites get a sticky contact system: a header phone button, a left "Need a rental? Contact now" rail that opens a quote drawer, a glowing emergency call button at the bottom right, and a mobile bottom bar. The generator asks whether the phone is answered 24/7; the button says "Emergency call · 24/7" only if you answer yes. Details are in `kit/DESIGN.md` section 4.
 
 ## USA map: focus states
 
@@ -91,6 +99,7 @@ kit/
 └── DESIGN.md
 ```
 
+- **Equipment photos:** `kit/assets/equipment/<unit>/*.webp`, made from the team's photo folders with `npm install` then `npm run build:assets -- "<photo folder>"`. Unit-to-folder names are in `scripts/equipment-slugs.json`.
 - **Equipment, specs and prices:** `kit/skills/*/references/super-9-equipment-directory.md`. The Equipment and Service Area skills each hold a copy; update both together.
 - **Keyword lists:** `kit/skills/state-trailer-service-area-builder/references/super-9-keyword-matrix.md`.
 - **Version:** bump `version` in `package.json` when you change the kit, so commits show which kit a site started from.

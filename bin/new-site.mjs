@@ -78,7 +78,9 @@ Usage:
   new-trailer-site sync <folder> [--design]
 
 create   Make <folder> (or add to an existing project) with:
-           .agents/skills/        the page-building skills (homepage, equipment, service area, calculator)
+           .agents/skills/        the page-building skills (homepage, equipment, service area, calculator, pricing)
+           .claude/commands/      the /price-trailer command
+           public/equipment/      the team's equipment photos (WebP)
            NEW-SITE-PROMPT.md     master prompt with the build phases
            DESIGN.md              visual direction
            AGENTS.md, CLAUDE.md   tell Codex and Claude to read the kit first
@@ -364,7 +366,8 @@ function pricingSkeleton(a) {
   const rank = (n) => (n === superNumber(a.primary) ? 1 : n === superNumber(a.secondary) ? 2 : 3);
   return {
     updated: '',
-    source: 'super-9-equipment-directory.md + site-inputs.md (Extra rates, Delivery rates)',
+    source: 'super-9-equipment-directory.md + site-inputs.md (Extra rates, Delivery rates) + state-trailer-pricing-builder/references/pricing-source.md',
+    snapshot: { date: '', source: 'snapshot' },
     about: 'Filled by state-trailer-calculator-builder from the price list. starting is null when the directory lists no rate. Never hardcode prices elsewhere.',
     focus: [superNumber(a.primary), superNumber(a.secondary)].filter(Boolean),
     categories: SUPER9.map((label, i) => ({
@@ -376,7 +379,9 @@ function pricingSkeleton(a) {
       lengths: [],
       statesConfirmed: [],
       variants: [],
+      rates: [],
     })),
+    addOns: [],
     delivery: [],
     notes: [],
   };
@@ -450,6 +455,26 @@ async function copySkills(dir) {
   return names;
 }
 
+async function copyCommandsAndAssets(dir) {
+  const written = [];
+  const commands = join(KIT, 'commands');
+  if (existsSync(commands)) {
+    const target = join(dir, '.claude', 'commands');
+    await mkdir(target, { recursive: true });
+    for (const f of await readdir(commands)) {
+      await cp(join(commands, f), join(target, f));
+      written.push(`.claude/commands/${f}`);
+    }
+  }
+  const assets = join(KIT, 'assets', 'equipment');
+  if (existsSync(assets)) {
+    await mkdir(join(dir, 'public'), { recursive: true });
+    await cp(assets, join(dir, 'public', 'equipment'), { recursive: true });
+    written.push('public/equipment/ (equipment photos)');
+  }
+  return written;
+}
+
 function run(cmd, args, cwd) {
   return spawnSync(cmd, args, { cwd, stdio: 'inherit', shell: process.platform === 'win32' });
 }
@@ -500,6 +525,7 @@ async function create(target, flags) {
 
   const skills = await copySkills(dir);
   written.push(...skills.map((s) => `.agents/skills/${s}/`));
+  written.push(...(await copyCommandsAndAssets(dir)));
 
   await cp(join(KIT, 'NEW-SITE-PROMPT.md'), join(dir, 'NEW-SITE-PROMPT.md'));
   written.push('NEW-SITE-PROMPT.md');
@@ -572,6 +598,7 @@ async function sync(target, flags) {
   console.log(`\nUpdated ${dir}`);
   await upsertAgentBlock(dir);
   for (const s of skills) console.log(`  ~ .agents/skills/${s}/`);
+  for (const w of await copyCommandsAndAssets(dir)) console.log(`  ~ ${w}`);
   console.log('  ~ NEW-SITE-PROMPT.md');
   console.log('  ~ AGENTS.md (kit block only)');
 
