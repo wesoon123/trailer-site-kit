@@ -26,3 +26,8 @@ test('directory holds no internal sheet data', () => {
     assert.ok(!text.includes(bad), `found ${bad}`);
   }
 });
+
+test('conflicts list records the sheet-versus-directory rate gap and the C6 update', () => {
+  assert.match(text, /\*\*C7 /);
+  assert.match(text, /per person, per day/);
+});

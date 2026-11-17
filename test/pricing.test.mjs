@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { KIT_ROOT } from './helpers.mjs';
 
@@ -64,4 +64,18 @@ test('sync restores a deleted command and the equipment photos', () => {
 
 test('kit version is 1.7.0', () => {
   assert.equal(JSON.parse(readFileSync(join(KIT_ROOT, 'package.json'), 'utf8')).version, '1.7.0');
+});
+
+test('snapshot marks its Note column as reference only', () => {
+  assert.match(read(sourcePath), /Note column is reference only/);
+  assert.match(read(join(skillDir, 'SKILL.md')), /Note column is reference only/);
+});
+
+test('sync keeps a newer site snapshot instead of regressing it', () => {
+  const site = createSite();
+  const file = join(site.dir, '.agents/skills/state-trailer-pricing-builder/references/pricing-source.md');
+  const newer = readFileSync(file, 'utf8').replace(/^Snapshot date: .*$/m, 'Snapshot date: 2099-01-01');
+  writeFileSync(file, newer);
+  execFileSync(process.execPath, [join(KIT_ROOT, 'bin', 'new-site.mjs'), 'sync', site.dir], { stdio: 'pipe' });
+  assert.match(readFileSync(file, 'utf8'), /^Snapshot date: 2099-01-01$/m);
 });

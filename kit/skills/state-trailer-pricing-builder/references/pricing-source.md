@@ -3,7 +3,7 @@
 Snapshot date: 2026-11-17
 Source: https://docs.google.com/spreadsheets/d/1Dyi8hWfgxqyiSUHZ3ji-xs9ktYkNgmxQoE_H19o1Vi4 (public tabs only)
 
-Figures are copied as written in the sheet. Never convert, add or average them. A blank cell means no listed rate: use Request a quote.
+Figures are copied as written in the sheet. Never convert, add or average them. A blank cell means no listed rate: use Request a quote. The Note column is reference only: never publish a note, and never read a price in a note as the rate for the row.
 Unit of Pricelist figures: unconfirmed (see O1). Each figure sits under the rental-length column it was written in.
 
 Left out on purpose (never published): the Government, GSA Pricelist and CANADA tabs; Pricelist tiers 2-4, customer-type tiers and promo codes; supply cost and markup tables; internal estimating tabs.

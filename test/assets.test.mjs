@@ -49,3 +49,15 @@ test('generated site receives the equipment photos', () => {
   assert.ok(existsSync(dir));
   assert.ok(readdirSync(dir).some((f) => f.endsWith('.webp')));
 });
+
+test('no internal tier wording in asset paths', () => {
+  for (const f of walk(join(KIT_ROOT, 'kit/assets'))) assert.ok(!/tier/i.test(f), `tier in ${f}`);
+});
+
+test('nested ramp photos and distinct "(1)" photos are kept', () => {
+  const bulk = readdirSync(join(assetsDir, '40ft-bulk-kitchen'));
+  assert.ok(bulk.filter((f) => f.startsWith('ramps-')).length >= 7, 'ramp photos missing');
+  assert.ok(bulk.includes('layout1.webp') && bulk.includes('layout1-2.webp'), 'Layout1 (1) dropped');
+  const cmd = readdirSync(join(assetsDir, 'command-center'));
+  assert.ok(cmd.includes('mobile-command-center-trailer-exterior-2.webp'), 'exterior (1) dropped');
+});

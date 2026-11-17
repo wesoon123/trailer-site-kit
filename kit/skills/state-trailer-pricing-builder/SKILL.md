@@ -20,7 +20,7 @@ Follow `NEW-SITE-PROMPT.md` Part D and `DESIGN.md` section 7c for the page. Reus
 ## Which tabs publish
 - **Published:** Pricelist (Tier 1 list rates only), Most common Add Ons (service, delivery and tank price ranges), Other Add ONS, TurnkeyUnit.
 - **Held until the user confirms (conflict C6):** the Basecamp tab's turnkey package prices. Show "Request a quote" for Remote Man Camp.
-- **never published:** Government, GSA Pricelist, CANADA (ask first for a Canadian site), Pricelist tiers 2-4, customer-type tiers and promo codes, supply cost and markup tables, Sheet7 and every other internal estimating tab, any note or comment in the sheet.
+- **never published:** Government, GSA Pricelist, CANADA (ask first for a Canadian site), Pricelist tiers 2-4, customer-type tiers and promo codes, supply cost and markup tables, Sheet7 and every other internal estimating tab, any note or comment in the sheet. The snapshot's Note column is reference only: never publish a note, and never read a price in a note as the rate for its row.
 
 ## Run order (`/price-trailer`)
 1. **Pull.** Export the published tabs from the sheet (public link export, or the Drive connector). If the sheet cannot be read, use the snapshot and say exactly: `sheet unreachable, used snapshot dated <date>`. Never stop, and never write an empty `pricing.json`.

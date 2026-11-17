@@ -455,6 +455,17 @@ async function copySkills(dir) {
   return names;
 }
 
+// A site's /price-trailer run rewrites its own snapshot; sync must not replace it with an older kit copy.
+async function newerSiteSnapshot(dir, rel) {
+  const date = (text) => /^Snapshot date: (\d{4}-\d{2}-\d{2})$/m.exec(text)?.[1] ?? '';
+  const file = join(dir, rel);
+  if (!existsSync(file)) return null;
+  const site = await readFile(file, 'utf8');
+  const kitFile = join(KIT, 'skills', 'state-trailer-pricing-builder', 'references', 'pricing-source.md');
+  const kit = existsSync(kitFile) ? await readFile(kitFile, 'utf8') : '';
+  return date(site) > date(kit) ? site : null;
+}
+
 async function copyCommandsAndAssets(dir) {
   const written = [];
   const commands = join(KIT, 'commands');
@@ -593,7 +604,10 @@ async function sync(target, flags) {
   const dir = resolve(target);
   if (!existsSync(dir)) fail(`Folder not found: ${dir}`);
 
+  const snapshotRel = join('.agents', 'skills', 'state-trailer-pricing-builder', 'references', 'pricing-source.md');
+  const keptSnapshot = await newerSiteSnapshot(dir, snapshotRel);
   const skills = await copySkills(dir);
+  if (keptSnapshot) await writeFile(join(dir, snapshotRel), keptSnapshot);
   await cp(join(KIT, 'NEW-SITE-PROMPT.md'), join(dir, 'NEW-SITE-PROMPT.md'));
   console.log(`\nUpdated ${dir}`);
   await upsertAgentBlock(dir);
