@@ -9,7 +9,8 @@
   },
   "scripts": {
     "new-site": "node bin/new-site.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "build:assets": "node scripts/build-equipment-assets.mjs"
   },
   "engines": {
     "node": ">=18.17"
@@ -20,5 +21,8 @@
     "examples",
     "README.md"
   ],
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
 }
