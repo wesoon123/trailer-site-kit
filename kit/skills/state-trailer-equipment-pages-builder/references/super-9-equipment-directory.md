@@ -13,6 +13,7 @@ Company baseline for equipment categories, unit lineup, utility specs, scope key
 | 7 | Laundry / Mobile Laundry / Portable Laundry | `laundry-trailers` | No: Request a quote |
 | 8 | Sleeper / Bunkbed / Portable Sleeper | `sleeper-trailers` | No: Request a quote |
 | 9 | Remote Man Camp Basecamp / Remote Workforce Housing | `remote-man-camps` | Pending: turnkey package $200–$350 per person, billing period unconfirmed (see C6). Request a quote until confirmed |
+| Extra | Handwashing Trailers / Portable and Hands-Free Handwashing Stations (outside the Super 9) | `handwashing-trailers` | No: Request a quote |
 
 ---
 
@@ -217,6 +218,36 @@ Company baseline for equipment categories, unit lineup, utility specs, scope key
 **Camp arrangements depend on:** workforce size, project duration, site access, water supply, power, and wastewater service.
 
 **Turnkey Facility Integration:** Complete life-support infrastructure bundling Mobile Kitchens, Dishwashing, Refrigeration, Restroom/Shower Trailers, Laundry, and Sleeper Trailers with 100 kW Generators, Spider Boxes, Potable Water Bladders, Waste Pumping, and Grease Trap Management.
+
+---
+
+## Extra: Handwashing Trailers (outside the Super 9)
+
+**Scope Keywords:** handwashing trailer, portable handwashing station, hands-free handwashing station, handwashing sink trailer.
+
+**Rates:** none listed. Use **Request a quote**.
+
+### Portable Handwashing Stations
+- **Specs:** spec pending
+
+### Hands-Free Handwashing Stations
+- **Specs:** spec pending
+
+---
+
+## Additional equipment (photos only, specs pending)
+
+Units the team has photos for but no confirmed spec or rate. Do not describe equipment or publish a price for them until the team supplies both. Use **Request a quote**.
+
+- Command Center. Specs: spec pending
+- Dining Hall. Specs: spec pending
+- Generator Trailer. Specs: spec pending
+- Water Tank. Specs: spec pending
+- Bladder Bag. Specs: spec pending
+- Stairs. Specs: spec pending
+- Multifunctional Trailer (38ft All Electric Kitchen). Specs: spec pending
+- Office, Sleeper and Shower & Restroom Trailer. Specs: spec pending
+- Temporary Sleeping Facilities. Specs: spec pending
 
 ---
 
