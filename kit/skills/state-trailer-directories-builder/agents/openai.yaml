@@ -1,0 +1,3 @@
+interface:
+  display_name: "State Trailer Directories Builder"
+  short_description: "Build a free directory listing worklist with the site's details ready to paste."

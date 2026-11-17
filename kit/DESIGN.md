@@ -86,15 +86,15 @@ Mobile < 640px · Tablet 640–1023px · Desktop ≥ 1024px. Design each separat
 
 ## 4. Shared page chrome (every page)
 - **Top bar** (navy-900, 13px): dispatch line on the left (for example "Miami dispatch · U.S. inquiries"; "24/7" only if verified), phone in lime on the right.
-- **Header** (white, bottom border): wordmark left; nav exactly **Home | Equipment | Service Area | Use cases | About Us | Contact Us** (active item: 2px aqua underline); lime "Request Quote →" pill right. Wraps cleanly on mobile; accessible mobile menu.
+- **Header** (white, bottom border): wordmark left; nav exactly **Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us** (active item: 2px aqua underline); lime "Request Quote →" pill right. Wraps cleanly on mobile; accessible mobile menu.
 - **Breadcrumb** on every interior page, small, inside the hero.
-- **Footer** (navy-900): wordmark, brand line with city/state, phone in lime, the same six nav labels.
+- **Footer** (navy-900): wordmark, brand line with city/state, phone in lime, the same seven nav labels.
 
 ### Sticky contact system (every page, built once in the shared layout)
 Four fixed elements keep a call or a quote one tap away. All are original to this kit; take the idea, never another site's layout, wording, or artwork.
 - **Header phone button** (desktop, 1024px and up): the header is sticky and shrinks on scroll. Beside the nav sits a dark pill with a small line "Call our team" and the phone number large beneath it, as a `tel:` link. Add ", 24/7" to the small line only when Part A "Phone answered 24/7" is yes.
 - **Left contact rail** (desktop and tablet): a dark navy tab fixed to the left edge, vertically centered, about 64 px wide, with a chat icon in a rounded tint square above the label "Need a rental? Contact now". Click or Enter opens the **Quote drawer**. It never opens by itself.
-- **Quote drawer** (right side on desktop, full-screen sheet on mobile): a dialog with a focus trap, Esc to close, and focus returned to the opener. Fields: name, phone, email, state and city, equipment (the Super 9 list), project details (optional), a consent checkbox linking the Privacy Notice, and a hidden honeypot field ("Company website"). Real validation, posts to the approved destination (Part B), shows a clear success or failure message, and always repeats "or call [phone]". Never pretend it sent.
+- **Quote drawer** (right side on desktop, full-screen sheet on mobile): a dialog with a focus trap, Esc to close, and focus returned to the opener. Fields: name, phone, email, state and city, equipment (the Super 9 list), rental dates and duration, project details (optional), a consent checkbox linking the Privacy Notice, and a hidden honeypot field ("Company website"). Real validation, posts to the `Form endpoint:` in `site-inputs.md`, shows a clear success or failure message, and always repeats "or call [phone]". Never pretend it sent. Rule: no form renders without a Form endpoint; with it blank or `none`, the drawer and the Contact Us form show the call-first prompt and the phone link instead. The emergency call is on by default for this kit (phone +1 (800) 443-5212, "Phone answered 24/7" yes).
 - **Floating emergency call** (bottom right, 16 px from the edges): a red pill at least 56 px tall with white text (`--color-emergency`), a small pulsing status dot, a small top line, and "Call now" below. It is a `tel:` link with `aria-label="Call [brand] now: [phone]"`. Top line: **"Emergency call · 24/7"** when Part A "Phone answered 24/7" is yes, otherwise "Rental line · Call now". Never write "Emergency" or "24/7" unless verified (Part E rule 13).
   - **Glow so visitors notice it:** a soft red halo ring (`--color-emergency-glow`) expands about 14 px and fades, 2.4 s, ease-out, repeating, with the dot breathing in step. Pure CSS (`box-shadow` keyframes). It pauses on hover and focus, never flashes faster than once a second, and with `prefers-reduced-motion: reduce` it becomes a static 2 px ring. This is the one glow allowed on the site.
 - **Floating "Calculate estimate" pill** (bottom left, navy, calculator icon): opens the estimate modal (section 7b). Hidden on the calculator page. An optional "Rental guide" pill may stack above it, only when a guide or articles page exists.
@@ -105,7 +105,7 @@ Four fixed elements keep a call or a quote one tap away. All are original to thi
 
 | # | Skill section | Pattern | Adaptation rules |
 |---|---|---|---|
-| 01 | Header and navigation | Shared chrome | Exact six labels. |
+| 01 | Header and navigation | Shared chrome | Exact seven labels. |
 | 02 | Hero | Full-bleed real photo, navy overlay on the left, eyebrow, H1 with accent phrase, short paragraph, CTA, aqua-stroke wave | Real primary trailer photo. H1 max 4 lines on desktop. |
 | 03 | Quick rental inquiry | White card overlapping the hero bottom | Equipment type, city/ZIP, start date, duration, contact. Stacked on mobile. Real submission destination only. |
 | 04 | Equipment showcase | Featured card + smaller cards | **Not equal cards.** Primary service gets the large navy featured card, secondary a light card, the rest small linked chips, following the keyword split. |
@@ -119,14 +119,14 @@ Four fixed elements keep a call or a quote one tap away. All are original to thi
 | 12 | How rental works | 4 steps on navy | Inquire, select, review site, confirm quote and delivery. |
 | 13 | Technical planning guide | Light section | Checklist + spec table. |
 | 14 | FAQs | `<details>` accordion, first open | |
-| 15 | Final CTA and footer | Wave + navy CTA band, footer | Same six labels. |
+| 15 | Final CTA and footer | Wave + navy CTA band, footer | Same seven labels. |
 
 **Stats strip:** numbers only when verified. Otherwise factual tiles (for example "Daily, weekly and monthly rentals") or drop it.
 
 ## 6. Service Area pages (approved layouts)
 
 ### USA map page `/service-area/` (national sites)
-1. Shared chrome: header with nav (**Home | Equipment | Service Area | Use cases | About Us | Contact Us**, current page underlined) and the dark Request Quote button.
+1. Shared chrome: header with nav (**Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us**, current page underlined) and the dark Request Quote button.
 2. Hero (light `--color-surface` background, two columns): breadcrumb "Home › Service Area"; place-first H1 "United States [Primary Service] Service Areas"; a "DESCRIPTION · 2–3 SENTENCES" intro; dark "Get a Quote" and outlined "Call [Phone]" buttons. Right column: feature image, a real trailer photo (dashed placeholder until supplied).
 3. **By Region and Featured State** (white): H2, short intro, then two pill rows. **Region:** All, West, Midwest, South, Northeast. **Featured:** the site's focus states (Part A "Focus states"), for example Florida, Texas, Utah, Wyoming.
    - **Left, map card:** eyebrow "STATE / REGION MAP · CLICKABLE", a "State" select at top right (also the mobile and keyboard path), the map, and a legend (In selected region, Other regions, Featured state, Selected).
@@ -184,6 +184,14 @@ Page `/rental-calculator/`, built with `state-trailer-calculator-builder`. The s
 **Estimate modal (floating):** a navy pill fixed bottom left, "Calculate estimate" with a calculator icon, on every page except the calculator page. It opens a dialog with the same form and result card (stacked on mobile), the optional quote request, and "Open the full calculator →". On the homepage the hero's secondary button opens it too. It never opens automatically.
 
 **Prices:** only from the price list (directory, Extra rates, Delivery rates), in the trailer-focus order, never hardcoded. No rate means "Request a quote". See the calculator skill for the full rules.
+
+### 7c. Pricing page
+Page `/pricing/`, built with `state-trailer-pricing-builder` from `src/data/pricing.json`. The look is this kit's own.
+1. Shared chrome and breadcrumb "Home › Pricing".
+2. Hero (`--color-surface`): eyebrow "PRICING", H1 "[Brand] Trailer Rental Pricing", two-sentence intro, and a notice chip "Rates depend on rental length and site".
+3. One rate table card per category (white, rounded 24px, 1px border) in the focus order: columns for each rental-length column from the sheet, striped rows, "Request a quote" where no rate exists. On mobile, scroll horizontally inside the table only, with a sticky first column.
+4. Add-on tables (water and waste service, delivery, kitchen, ramps, stairs, generators, turnkey per unit) in the same card style.
+5. "Prices updated [date]", the disclaimer, a phone link and the quote path (form only when a Form endpoint is set), FAQs (3–4), CTA band.
 
 ## 8. Components to build once (Next.js + TypeScript)
 `TopBar`, `SiteHeader` (accessible mobile menu, sticky phone button), `StickyContact` (left rail, floating emergency call, mobile bottom bar), `QuoteDrawer`, `EstimateForm` + `EstimateModal` (calculator), `Breadcrumbs`, `Hero`, `PageHero`, `PlaceHero`, `WaveDivider`, `SectionHeading` (eyebrow + two-tone heading), `CtaButton`, `IconBadge`, `FactsStrip`, `EquipmentFeature`, `EquipmentChips`, `QuoteForm`, `RateTable`, `SpecTable`, `DataPointTimeline`, `InfoCardPair`, `NearbyPlaces`, `StepList`, `TestimonialCarousel` (renders nothing without real reviews), `UsIncidentMap` + `StatePanel` (client), `StateIncidentList` (server), `StateMap` (client), `PlaceList` (server), `FaqAccordion`, `CtaBand`, `SiteFooter`.

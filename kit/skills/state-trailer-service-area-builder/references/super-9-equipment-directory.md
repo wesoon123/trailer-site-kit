@@ -13,6 +13,7 @@ Company baseline for equipment categories, unit lineup, utility specs, scope key
 | 7 | Laundry / Mobile Laundry / Portable Laundry | `laundry-trailers` | No: Request a quote |
 | 8 | Sleeper / Bunkbed / Portable Sleeper | `sleeper-trailers` | No: Request a quote |
 | 9 | Remote Man Camp Basecamp / Remote Workforce Housing | `remote-man-camps` | Pending: turnkey package $200–$350 per person, billing period unconfirmed (see C6). Request a quote until confirmed |
+| Extra | Handwashing Trailers / Portable and Hands-Free Handwashing Stations (outside the Super 9) | `handwashing-trailers` | No: Request a quote |
 
 ---
 
@@ -220,6 +221,36 @@ Company baseline for equipment categories, unit lineup, utility specs, scope key
 
 ---
 
+## Extra: Handwashing Trailers (outside the Super 9)
+
+**Scope Keywords:** handwashing trailer, portable handwashing station, hands-free handwashing station, handwashing sink trailer.
+
+**Rates:** none listed. Use **Request a quote**.
+
+### Portable Handwashing Stations
+- **Specs:** spec pending
+
+### Hands-Free Handwashing Stations
+- **Specs:** spec pending
+
+---
+
+## Additional equipment (photos only, specs pending)
+
+Units the team has photos for but no confirmed spec or rate. Do not describe equipment or publish a price for them until the team supplies both. Use **Request a quote**.
+
+- Command Center. Specs: spec pending
+- Dining Hall. Specs: spec pending
+- Generator Trailer. Specs: spec pending
+- Water Tank. Specs: spec pending
+- Bladder Bag. Specs: spec pending
+- Stairs. Specs: spec pending
+- Multifunctional Trailer (38ft All Electric Kitchen). Specs: spec pending
+- Office, Sleeper and Shower & Restroom Trailer. Specs: spec pending
+- Temporary Sleeping Facilities. Specs: spec pending
+
+---
+
 ## Data conflicts to confirm before publishing
 
 These are reviewer notes, not source data. Until confirmed, do not publish the affected value: show **Request a quote** or omit the spec, and list it in the unverified-claims report. Delete each item once resolved.
@@ -228,5 +259,6 @@ These are reviewer notes, not source data. Until confirmed, do not publish the a
 - **C2 (30ft Luxury Combination, 8 stalls):** 1–14 Days $3,995 is lower than the smaller 22ft 6-stall unit ($4,995), and its Monthly range ($3,995–$5,995) starts at the same figure as its 1–14 Days rate. Likely a typo.
 - **C3 (ADA combination units):** 3 Stall + 1 ADA and 8 Stall + 1 ADA have identical rates ($5,995–$6,995 / $7,995). Confirm this is intended.
 - **C4 (Combination rate period):** confirm "1–14 Days" is a flat price for any rental of 1 to 14 days, not a per-day rate, before wording it on a page.
-- **C6 (Man camp package price):** the data center addition notes give $200–$350 per person, with the billing period unconfirmed (per person, per day, or other). Publish no man camp price, including in the calculator, until the billing period and package inclusions are confirmed. Location-based adjustments of 1%–5% are allowed only where supported by actual service costs and approved pricing.
+- **C6 (Man camp package price):** the data center addition notes give $200–$350 per person, with the billing period unconfirmed (per person, per day, or other). Publish no man camp price, including in the calculator, until the billing period and package inclusions are confirmed. Location-based adjustments of 1%–5% are allowed only where supported by actual service costs and approved pricing. Update from the sheet: its Basecamp tab lists Basic Turnkey $345.89 and Advanced Turnkey $425.00, per person, per day. The billing period is now stated, but the figures stay held until the team confirms they replace $200–$350.
 - **C5 (40ft Bulk Combination Kitchen):** specs list only the included prep trailer's equipment (no cooking line). Confirm the cooking equipment before describing it as a production kitchen beyond what is listed.
+- **C7 (Sheet Pricelist versus directory rates):** the sheet's Pricelist figures (for example 24ft Mobile Kitchen 1-6 Days `5995 to 7995`, 12ft Refrigerated 1-6 Days `1495`) are far from the Daily/Weekly/Monthly ranges above, and their unit is unconfirmed. The calculator reads the ranges above; the `/pricing/` page reads the sheet. Until the team confirms which is current, a site must not show a number for the same unit in both places: show Request a quote in the calculator, or hold the pricing table.

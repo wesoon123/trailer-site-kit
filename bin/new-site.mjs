@@ -78,7 +78,9 @@ Usage:
   new-trailer-site sync <folder> [--design]
 
 create   Make <folder> (or add to an existing project) with:
-           .agents/skills/        the page-building skills (homepage, equipment, service area, calculator)
+           .agents/skills/        the page-building skills (homepage, equipment, service area, calculator, pricing)
+           .claude/commands/      the /price-trailer command
+           public/equipment/      the team's equipment photos (WebP)
            NEW-SITE-PROMPT.md     master prompt with the build phases
            DESIGN.md              visual direction
            AGENTS.md, CLAUDE.md   tell Codex and Claude to read the kit first
@@ -160,14 +162,15 @@ const FIELDS = [
     check: (v) => Boolean(findState(v)) || 'Not a U.S. state or DC.',
   },
   { key: 'dispatch', label: 'Verified dispatch locations (e.g. City, ST)' },
-  { key: 'phone', label: 'Phone' },
+  { key: 'phone', label: 'Phone', def: () => '+1 (800) 443-5212' },
   {
     key: 'hours247',
     label: 'Is the phone answered 24/7? yes or no (controls the "Emergency call 24/7" button)',
-    def: () => 'no',
+    def: () => 'yes',
     check: (v) => ['yes', 'no'].includes(v.toLowerCase()) || 'Type yes or no.',
   },
   { key: 'email', label: 'Email' },
+  { key: 'formEndpoint', label: 'Quote form endpoint URL (blank = no form, call-first only)' },
   {
     key: 'primary',
     label: 'Primary service, Super 9 number',
@@ -307,8 +310,9 @@ function siteInputsMarkdown(a) {
     ['Home state / abbreviation:', `${stateName} / ${abbr}`],
     ['Verified dispatch locations:', or(a.dispatch)],
     ['Phone:', or(a.phone)],
-    ['Phone answered 24/7:', a.hours247 || 'no'],
+    ['Phone answered 24/7:', a.hours247 || 'yes'],
     ['Email:', or(a.email)],
+    ['Form endpoint:', or(a.formEndpoint, 'none (no form; call-first)')],
     ['Primary rental service:', service(a.primary)],
     ['Secondary rental service:', service(a.secondary)],
     ['Keyword split:', a.split],
@@ -362,7 +366,8 @@ function pricingSkeleton(a) {
   const rank = (n) => (n === superNumber(a.primary) ? 1 : n === superNumber(a.secondary) ? 2 : 3);
   return {
     updated: '',
-    source: 'super-9-equipment-directory.md + site-inputs.md (Extra rates, Delivery rates)',
+    source: 'super-9-equipment-directory.md + site-inputs.md (Extra rates, Delivery rates) + state-trailer-pricing-builder/references/pricing-source.md',
+    snapshot: { date: '', source: 'snapshot' },
     about: 'Filled by state-trailer-calculator-builder from the price list. starting is null when the directory lists no rate. Never hardcode prices elsewhere.',
     focus: [superNumber(a.primary), superNumber(a.secondary)].filter(Boolean),
     categories: SUPER9.map((label, i) => ({
@@ -374,7 +379,9 @@ function pricingSkeleton(a) {
       lengths: [],
       statesConfirmed: [],
       variants: [],
+      rates: [],
     })),
+    addOns: [],
     delivery: [],
     notes: [],
   };
@@ -409,8 +416,10 @@ Build pages only with the skills in \`.agents/skills/\`:
 - Equipment pages: \`state-trailer-equipment-pages-builder\`
 - Service Area pages (USA map, states, hub cities, places): \`state-trailer-service-area-builder\`
 - Rental calculator page and floating estimate modal: \`state-trailer-calculator-builder\`. Prices come only from the price list, never hardcoded.
+- Pricing page and price refresh (\`/price-trailer\`): \`state-trailer-pricing-builder\`. Only the published sheet tabs, never internal figures.
+- Free directory listings and the \`/directories-trailer-kit\` command: \`state-trailer-directories-builder\`. It reads and plans; the team submits each listing.
 
-Navigation on every page: Home | Equipment | Service Area | Use cases | About Us | Contact Us.
+Navigation on every page: Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us.
 
 Kit files (skills, NEW-SITE-PROMPT.md, this block) are updated with \`new-trailer-site sync\`. Change site facts in \`site-inputs.md\`, not in the skills.
 <!-- END:trailer-site-kit -->
@@ -445,6 +454,37 @@ async function copySkills(dir) {
     await cp(join(KIT, 'skills', name), join(target, name), { recursive: true });
   }
   return names;
+}
+
+// A site's /price-trailer run rewrites its own snapshot; sync must not replace it with an older kit copy.
+async function newerSiteSnapshot(dir, rel) {
+  const date = (text) => /^Snapshot date: (\d{4}-\d{2}-\d{2})$/m.exec(text)?.[1] ?? '';
+  const file = join(dir, rel);
+  if (!existsSync(file)) return null;
+  const site = await readFile(file, 'utf8');
+  const kitFile = join(KIT, 'skills', 'state-trailer-pricing-builder', 'references', 'pricing-source.md');
+  const kit = existsSync(kitFile) ? await readFile(kitFile, 'utf8') : '';
+  return date(site) > date(kit) ? site : null;
+}
+
+async function copyCommandsAndAssets(dir) {
+  const written = [];
+  const commands = join(KIT, 'commands');
+  if (existsSync(commands)) {
+    const target = join(dir, '.claude', 'commands');
+    await mkdir(target, { recursive: true });
+    for (const f of await readdir(commands)) {
+      await cp(join(commands, f), join(target, f));
+      written.push(`.claude/commands/${f}`);
+    }
+  }
+  const assets = join(KIT, 'assets', 'equipment');
+  if (existsSync(assets)) {
+    await mkdir(join(dir, 'public'), { recursive: true });
+    await cp(assets, join(dir, 'public', 'equipment'), { recursive: true });
+    written.push('public/equipment/ (equipment photos)');
+  }
+  return written;
 }
 
 function run(cmd, args, cwd) {
@@ -497,6 +537,7 @@ async function create(target, flags) {
 
   const skills = await copySkills(dir);
   written.push(...skills.map((s) => `.agents/skills/${s}/`));
+  written.push(...(await copyCommandsAndAssets(dir)));
 
   await cp(join(KIT, 'NEW-SITE-PROMPT.md'), join(dir, 'NEW-SITE-PROMPT.md'));
   written.push('NEW-SITE-PROMPT.md');
@@ -564,11 +605,15 @@ async function sync(target, flags) {
   const dir = resolve(target);
   if (!existsSync(dir)) fail(`Folder not found: ${dir}`);
 
+  const snapshotRel = join('.agents', 'skills', 'state-trailer-pricing-builder', 'references', 'pricing-source.md');
+  const keptSnapshot = await newerSiteSnapshot(dir, snapshotRel);
   const skills = await copySkills(dir);
+  if (keptSnapshot) await writeFile(join(dir, snapshotRel), keptSnapshot);
   await cp(join(KIT, 'NEW-SITE-PROMPT.md'), join(dir, 'NEW-SITE-PROMPT.md'));
   console.log(`\nUpdated ${dir}`);
   await upsertAgentBlock(dir);
   for (const s of skills) console.log(`  ~ .agents/skills/${s}/`);
+  for (const w of await copyCommandsAndAssets(dir)) console.log(`  ~ ${w}`);
   console.log('  ~ NEW-SITE-PROMPT.md');
   console.log('  ~ AGENTS.md (kit block only)');
 

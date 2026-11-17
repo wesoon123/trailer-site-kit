@@ -152,7 +152,7 @@ Date every event; prefer the last 10 years plus landmark historic events. Every 
 ## Page wireframes
 
 ### Level 0: USA index (national sites)
-1. Header (exact nav: **Home | Equipment | Service Area | Use cases | About Us | Contact Us**, plus Request Quote) and breadcrumb.
+1. Header (exact nav: **Home | Equipment | Pricing | Service Area | Use cases | About Us | Contact Us**, plus Request Quote) and breadcrumb.
 2. Hero: place-first H1 ("United States [Primary Service] Service Areas"), short intro, Get a Quote and Call buttons, feature image (real trailer photo).
 3. By Region and Featured State: Region pills, Featured (focus state) pills, USA map card with State select and legend, and the details card for the selected state.
 4. Incidents by State: cards plus a crawlable state-by-state list with each state's incidents and status.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "State Trailer Pricing Builder"
+  short_description: "Build the /pricing/ page and refresh price data from the team's public price sheet."
