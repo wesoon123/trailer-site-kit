@@ -20,9 +20,10 @@ Preview URL:
 Site scope:                  national (USA map + every state) | state (one state only)
 Home state / abbreviation:   (the state the homepage and Equipment pages focus on)
 Verified dispatch locations:
-Phone:
-Phone answered 24/7:       yes | no  (controls any call-hours label)
+Phone:                       (default +1 (800) 443-5212)
+Phone answered 24/7:       yes | no  (controls any call-hours label; kit default yes)
 Email:
+Form endpoint:               (URL of the approved quote-form destination, or none; no form renders without a Form endpoint)
 Primary rental service:      (Super 9 category name and #)
 Secondary rental service:    (Super 9 category name and #)
 Keyword split:               primary / secondary / other   (default 70 / 15 / 15)
@@ -52,6 +53,7 @@ Verified dispatch locations: [CITY, ST]
 Phone:                       [PHONE]
 Phone answered 24/7:         [yes or no]
 Email:                       [EMAIL]
+Form endpoint:               [URL or none]
 Primary rental service:      Laundry / Mobile Laundry / Portable Laundry (#7)
 Secondary rental service:    Commercial Dishwashing (#2)
 Keyword split:               60 / 30 / 10
@@ -82,7 +84,7 @@ Second brain vault:          [PATH OR REPO URL, or none]
 - Moved routes get permanent redirects in `next.config`.
 - Images: `next/image` with width, height, and descriptive alt text.
 - Fonts: Poppins and Inter through `next/font/google`.
-- Forms: use a verified, approved submission destination with real validation and an end-to-end submission test. A static export cannot run a Next.js route handler or server action; use an approved external form endpoint or a separately supported backend. When neither exists, show a call-first inquiry checklist and request the missing destination. Never pretend a form works.
+- Forms: use a verified, approved submission destination with real validation and an end-to-end submission test. A static export cannot run a Next.js route handler or server action; use an approved external form endpoint or a separately supported backend. When neither exists, show a call-first inquiry checklist and request the missing destination. Never pretend a form works. Rule: no form renders without a Form endpoint in `site-inputs.md`; with the line blank or `none`, the quote drawer and the Contact Us form show the call-first prompt and the phone link instead.
 - Client components (`'use client'`) only for the menu, maps, form, and carousel.
 - Done means `next build`, `tsc --noEmit`, and lint all pass with no errors and no `any` types.
 
